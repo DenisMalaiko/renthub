@@ -7,7 +7,6 @@
             <v-col cols="3">
               <v-combobox
                 v-model="searchForm.city"
-                :search-input.sync="searchCityQuery"
                 :items="cities"
                 item-text="cityName"
                 label="Where"
@@ -89,6 +88,8 @@
 
       <v-row>
         <v-col cols="12">
+
+          <pre>{{cities}}</pre>
           <pre>{{ searchForm }}</pre>
         </v-col>
       </v-row>

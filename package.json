@@ -11,10 +11,15 @@
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
+    "@types/node": "^20.14.9",
+    "@vue/tsconfig": "^0.5.1",
     "nuxt": "^3.12.2",
+    "vue": "^3.4.31",
     "vuetify-nuxt-module": "^0.14.1"
   },
   "devDependencies": {
-    "sass": "^1.77.6"
+    "@vue/compiler-sfc": "^3.4.31",
+    "sass": "^1.77.6",
+    "sass-loader": "^14.2.1"
   }
 }

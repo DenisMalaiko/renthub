@@ -1,0 +1,10 @@
+ul,
+ol {
+  list-style: none;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 100px);
+}

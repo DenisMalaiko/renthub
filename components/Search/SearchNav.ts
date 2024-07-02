@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { ref, watch, reactive } from 'vue';
 
 export function setupSearchComponent() {
   const loading = reactive({
@@ -35,9 +35,16 @@ export function setupSearchComponent() {
     }
   }
 
-  watch(searchCityQuery, (newValue: any) => {
+  /*watch(searchForm.city, (newValue: any) => {
     console.log("WATCH ", newValue)
     if(newValue && newValue.length >= 2) {
+      searchPlaces(newValue);
+    }
+  });*/
+
+  watch(() => searchForm.city, (newValue: any) => {
+    console.log("WATCH ", newValue)
+    if (newValue && newValue.length >= 2) {
       searchPlaces(newValue);
     }
   });
