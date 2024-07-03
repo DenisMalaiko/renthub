@@ -7,8 +7,9 @@
             <v-col cols="3">
               <v-combobox
                 v-model="searchForm.city"
+                v-model:search="searchCityQuery"
                 :items="cities"
-                item-text="cityName"
+                item-title="cityName"
                 label="Where"
                 :loading="loading.city"
               />
@@ -32,14 +33,13 @@
                 offset-y
                 min-width="290px"
               >
-                <template v-slot:activator="{ on, attrs }">
+                <template v-slot:activator="{ props }">
                   <v-text-field
                     v-model="searchForm.startDate"
                     label="Start date"
                     prepend-icon="mdi-calendar"
                     readonly
-                    v-bind="attrs"
-                    v-on="on"
+                    v-bind="props"
                   ></v-text-field>
                 </template>
                 <v-date-picker
@@ -58,14 +58,13 @@
                 offset-y
                 min-width="290px"
               >
-                <template v-slot:activator="{ on, attrs }">
+                <template v-slot:activator="{ props }">
                   <v-text-field
                     v-model="searchForm.endDate"
                     label="End date"
                     prepend-icon="mdi-calendar"
                     readonly
-                    v-bind="attrs"
-                    v-on="on"
+                    v-bind="props"
                   ></v-text-field>
                 </template>
                 <v-date-picker
