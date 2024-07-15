@@ -28,7 +28,7 @@
 
               <span>
                 Don't have an account?
-                <NuxtLink to="register">Sign Up</NuxtLink>
+                <NuxtLink to="/auth/register">Sign Up</NuxtLink>
               </span>
             </div>
           </v-form>
