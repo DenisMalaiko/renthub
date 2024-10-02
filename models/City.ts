@@ -1,11 +1,13 @@
 export class City {
   cityId: string;
   cityName: string;
-  cityFullName: string;
+  countryId: string;
+  countryName: string;
 
   constructor() {
     this.cityId = "";
     this.cityName = "";
-    this.cityFullName = "";
+    this.countryId = "";
+    this.countryName = "";
   }
 }

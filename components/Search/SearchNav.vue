@@ -18,7 +18,7 @@
             <v-col cols="3">
               <v-combobox
                 v-model="searchForm.product"
-                :search-input.sync="searchProductQuery"
+                v-model:search="searchProductQuery"
                 label="What"
                 placeholder="Search product..."
                 :loading="loading.product"
