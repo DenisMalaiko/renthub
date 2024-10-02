@@ -9,62 +9,62 @@
           <v-form ref="signUpFormRef" @submit.prevent="createUser()">
 
             <v-text-field
-                v-model="signUpForm.name"
-                :rules="rules.name"
-                label="Name"
-                class="mb-2"
+              v-model="signUpForm.name"
+              :rules="rules.name"
+              label="Name"
+              class="mb-2"
             ></v-text-field>
 
             <v-text-field
-                v-model="signUpForm.login"
-                :rules="rules.login"
-                label="Login"
-                class="mb-2"
+              v-model="signUpForm.login"
+              :rules="rules.login"
+              label="Login"
+              class="mb-2"
             ></v-text-field>
 
             <v-text-field
-                v-model="signUpForm.email"
-                :rules="rules.email"
-                label="Email"
-                class="mb-2"
+              v-model="signUpForm.email"
+              :rules="rules.email"
+              label="Email"
+              class="mb-2"
             ></v-text-field>
 
             <v-combobox
-                v-model="signUpForm.city"
-                :search-input.sync="searchCityQuery"
-                :items="cities"
-                :rules="rules.city"
-                item-text="cityName"
-                label="City"
-                :loading="loading.city"
-                class="mb-2"
+              v-model="signUpForm.city.cityName"
+              v-model:search="searchCityQuery"
+              :items="cities"
+              :rules="rules.city"
+              item-title="cityName"
+              label="City"
+              :loading="loading.city"
+              class="mb-2"
             />
 
             <div class="label-password mb-2">
               <v-text-field
-                  v-model="signUpForm.password"
-                  :rules="rules.password"
-                  :append-icon="password.isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="password.isShowPassword ? 'text' : 'password'"
-                  @click:append="password.isShowPassword = !password.isShowPassword"
-                  label="Password"
-                  validate-on-blur
+                v-model="signUpForm.password"
+                :rules="rules.password"
+                :append-icon="password.isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="password.isShowPassword ? 'text' : 'password'"
+                @click:append="password.isShowPassword = !password.isShowPassword"
+                label="Password"
+                validate-on-blur
               ></v-text-field>
 
               <v-progress-linear
-                  :color="score.color"
-                  :value="score.value"
+                :color="score.color"
+                :value="score.value"
               ></v-progress-linear>
             </div>
 
             <v-text-field
-                v-model="signUpForm.repeatPassword"
-                :rules="[rules.repeatPassword, (v) => rules.match(v, signUpForm.password)]"
-                :append-icon="password.isShowRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="password.isShowRepeatPassword ? 'text' : 'password'"
-                @click:append="password.isShowRepeatPassword = !password.isShowRepeatPassword"
-                label="Repeat password"
-                class="mb-2"
+              v-model="signUpForm.repeatPassword"
+              :rules="[rules.repeatPassword, (v) => rules.match(v, signUpForm.password)]"
+              :append-icon="password.isShowRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="password.isShowRepeatPassword ? 'text' : 'password'"
+              @click:append="password.isShowRepeatPassword = !password.isShowRepeatPassword"
+              label="Repeat password"
+              class="mb-2"
             ></v-text-field>
 
             <div class="d-flex align-center">
@@ -95,15 +95,14 @@
 <script setup lang="ts">
 import ToastAlert from "~/components/Toast/ToastAlert.vue";
 import {reactive, ref, computed, watch} from "vue";
-
 import {ValidationsRules} from "~/utils/validations-rules";
 import {User} from "~/models/User";
 
 const signUpFormRef = ref();
 const searchCityQuery = ref('');
 let cities: any = ref([]);
-
 const toastAlertRef = ref();
+
 
 const loading = reactive({
   city: false
@@ -113,6 +112,8 @@ const password = reactive({
   isShowPassword: false,
   isShowRepeatPassword: false
 })
+
+
 
 const rules = computed(() => {
   return {
@@ -159,12 +160,13 @@ const score = computed(() => {
 
 
 async function searchPlaces(city: string) {
-  const url = `http://localhost:8080/searchCity?city=${encodeURIComponent(city)}`;
+  const url = `http://localhost:8080/searchCity?city=${city}`;
 
   try {
     loading.city = true;
     const response = await fetch(url);
     const data = await response.json();
+    console.log("DATA ", data)
     cities.value = data;
     loading.city = false;
   } catch (error) {
@@ -223,7 +225,7 @@ async function createUser() {
 }
 
 watch(searchCityQuery, (newValue) => {
-  if(newValue && newValue.length >= 2) {
+  if(newValue && newValue.length >= 3) {
     searchPlaces(newValue);
   }
 });
