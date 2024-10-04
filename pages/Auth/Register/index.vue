@@ -59,16 +59,23 @@
 
             <v-text-field
               v-model="signUpForm.repeatPassword"
-              :rules="[rules.repeatPassword, (v) => rules.match(v, signUpForm.password)]"
+              :rules="rules.repeatPassword"
               :append-icon="password.isShowRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="password.isShowRepeatPassword ? 'text' : 'password'"
               @click:append="password.isShowRepeatPassword = !password.isShowRepeatPassword"
               label="Repeat password"
+              validate-on-blur
               class="mb-2"
             ></v-text-field>
 
             <div class="d-flex align-center">
-              <v-btn class="mr-5" type="submit">
+              <v-btn
+                type="submit"
+                :disabled="loading.creating"
+                :loading="loading.creating"
+                class="mr-5"
+                color="primary"
+              >
                 Sign Up
               </v-btn>
 
@@ -86,7 +93,7 @@
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRegisterLogic } from './register';
 import ToastAlert from "~/components/Toast/ToastAlert.vue";
 
