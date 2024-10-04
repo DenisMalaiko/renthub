@@ -35,29 +35,20 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <ToastAlert ref="toastAlertRef"/>
   </section>
 </template>
 
-<script setup lang="ts">
-import {reactive, ref, computed} from "vue";
-import {ValidationsRules} from "~/utils/validations-rules";
-import {Auth} from "~/models/Auth";
+<script lang="ts" setup>
+import { useLoginLogic } from "./login";
+import ToastAlert from "~/components/Toast/ToastAlert.vue";
 
-const signInFormRef = ref();
-const signInForm: Auth = reactive(new Auth());
-
-const rules = computed(() => {
-  return {
-    email: [ValidationsRules.required],
-    password: [ValidationsRules.required],
-  }
-})
-
-async function login(){
-  const valid = signInFormRef.value.isValid;
-
-  if(valid) {
-    console.log("VALID")
-  }
-}
+const {
+  signInForm,
+  signInFormRef,
+  rules,
+  login,
+  toastAlertRef
+} = useLoginLogic();
 </script>
