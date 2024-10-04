@@ -16,4 +16,13 @@ export class User {
     this.password = "";
     this.repeatPassword = "";
   }
+
+  clear() {
+    this.name = "";
+    this.login = "";
+    this.email = "";
+    this.city = new City();
+    this.password = "";
+    this.repeatPassword = "";
+  }
 }

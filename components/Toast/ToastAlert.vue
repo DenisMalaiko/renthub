@@ -2,6 +2,8 @@
   <v-snackbar
     v-model="toast"
     vertical
+    location="top"
+    :color="status"
   >
     {{ message }}
   </v-snackbar>
@@ -10,7 +12,7 @@
 <script setup>
 import { useToastAlert } from './ToastAlert.ts';
 
-const { toast, message, open } = useToastAlert();
+const { toast, message, status, open } = useToastAlert();
 
 defineExpose({
   open
