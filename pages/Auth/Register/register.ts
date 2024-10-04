@@ -8,7 +8,10 @@ export function useRegisterLogic() {
   const signUpFormRef = ref();
   const searchCityQuery = ref('');
   const toastAlertRef = ref();
-  const loading = reactive({ city: false });
+  const loading = reactive({
+    city: false,
+    creating: false
+  });
   const password = reactive({
     isShowPassword: false,
     isShowRepeatPassword: false
@@ -29,8 +32,7 @@ export function useRegisterLogic() {
         ValidationsRules.hasUpperCase,
         ValidationsRules.hasNumber
       ],
-      repeatPassword: [ValidationsRules.required],
-      match: ValidationsRules.match,
+      repeatPassword: [ValidationsRules.required, ValidationsRules.match(signUpForm.password, signUpForm.repeatPassword, "Passwords")],
     };
   });
 
@@ -71,8 +73,10 @@ export function useRegisterLogic() {
   }
 
   async function createUser() {
-    const valid = signUpFormRef.value.validate();
+    const valid = signUpFormRef.value.isValid;
     if (!valid) return;
+
+    loading.creating = true;
 
     const requestBody = {
       query: `mutation { createUser(userInput: { name: "${signUpForm.name}", login: "${signUpForm.login}", email: "${signUpForm.email}", city: { cityId: "${signUpForm.city.cityId}", cityName: "${signUpForm.city.cityName}", countryId: "${signUpForm.city.countryId}", countryName: "${signUpForm.city.countryName}", fullAddress: "${signUpForm.city.fullAddress}"}, password: "${signUpForm.password}" }) { _id email } }`
@@ -95,6 +99,8 @@ export function useRegisterLogic() {
       router.push('/auth/login')
     } catch (err: any) {
       toastAlertRef.value.open({ status: "error", message: err.message });
+    } finally {
+      loading.creating = true;
     }
   }
 

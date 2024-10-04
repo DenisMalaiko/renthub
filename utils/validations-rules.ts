@@ -7,5 +7,5 @@ export const ValidationsRules = {
     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return pattern.test(v) || 'Invalid e-mail.'
   },
-  match: (v1: string, v2: string) => v1 === v2 || "Passwords do not match",
+  match: (v1: string, v2: string | any, text: string) => v1 === v2 || `${text} do not match`,
 }

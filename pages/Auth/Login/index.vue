@@ -22,7 +22,13 @@
             ></v-text-field>
 
             <div class="d-flex align-center">
-              <v-btn class="mr-5" type="submit">
+              <v-btn
+                class="mr-5"
+                type="submit"
+                :disabled="loading.creating"
+                :loading="loading.creating"
+                color="primary"
+              >
                 Sign In
               </v-btn>
 
@@ -49,6 +55,7 @@ const {
   signInFormRef,
   rules,
   login,
-  toastAlertRef
+  toastAlertRef,
+  loading
 } = useLoginLogic();
 </script>

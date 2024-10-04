@@ -6,6 +6,9 @@ export function useLoginLogic() {
   const signInFormRef = ref();
   const signInForm: Auth = reactive(new Auth());
   const toastAlertRef = ref();
+  const loading = reactive({
+    creating: false
+  })
 
   const rules = computed(() => {
     return {
@@ -18,6 +21,8 @@ export function useLoginLogic() {
     const valid = signInFormRef.value.isValid;
     if(!valid) return;
 
+    loading.creating = true;
+
     const requestBody = {
       query: `query { login(email: "${signInForm.email}", password: "${signInForm.password}") { userId token tokenExpiration } }`
     }
@@ -28,6 +33,7 @@ export function useLoginLogic() {
         body: JSON.stringify(requestBody),
         headers: { 'Content-Type': 'application/json' },
       });
+
       const responseData = await response.json();
 
       if (!response.ok) {
@@ -37,6 +43,8 @@ export function useLoginLogic() {
       toastAlertRef.value.open({ status: "success", message: "User has been successfully logined!" });
     } catch (err: any) {
       toastAlertRef.value.open({ status: "error", message: err.message });
+    } finally {
+      loading.creating = false;
     }
   }
 
@@ -45,6 +53,7 @@ export function useLoginLogic() {
     signInFormRef,
     rules,
     login,
-    toastAlertRef
+    toastAlertRef,
+    loading
   }
 }

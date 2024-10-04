@@ -6,5 +6,5 @@ ol {
 .auth {
   display: flex;
   align-items: center;
-  height: calc(100vh - 100px);
+  height: 100vh;
 }
