@@ -87,9 +87,6 @@
 
       <v-row>
         <v-col cols="12">
-
-          <pre>{{cities}}</pre>
-          <pre>{{ searchForm }}</pre>
         </v-col>
       </v-row>
     </v-container>

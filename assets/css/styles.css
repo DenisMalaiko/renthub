@@ -8,3 +8,11 @@ ol {
   align-items: center;
   height: 100vh;
 }
+
+.home {
+  padding-top: 70px;
+}
+
+.home .v-text-field .v-input__details {
+  display: none !important;
+}
