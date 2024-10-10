@@ -1,8 +1,12 @@
 import {reactive, ref, computed} from "vue";
 import {ValidationsRules} from "~/utils/validations-rules";
 import {Auth} from "~/models/Auth";
+import {UserModule} from "~/store";
+import {useRouter} from "nuxt/app";
 
 export function useLoginLogic() {
+  const router = useRouter()
+  const user = UserModule();
   const signInFormRef = ref();
   const signInForm: Auth = reactive(new Auth());
   const toastAlertRef = ref();
@@ -24,7 +28,7 @@ export function useLoginLogic() {
     loading.creating = true;
 
     const requestBody = {
-      query: `query { login(email: "${signInForm.email}", password: "${signInForm.password}") { userId token tokenExpiration } }`
+      query: `query { login(email: "${signInForm.email}", password: "${signInForm.password}") { _id token tokenExpiration name login email } }`
     }
 
     try {
@@ -40,7 +44,12 @@ export function useLoginLogic() {
         throw new Error(responseData.errors ? responseData.errors.map((e: any) => e.message).join(', ') : 'Unknown error');
       }
 
+      console.log("RESPONSE DATA ", responseData.data.login)
+      user.setUser(responseData.data.login)
+
       toastAlertRef.value.open({ status: "success", message: "User has been successfully logined!" });
+
+      router.push('/auth/profile')
     } catch (err: any) {
       toastAlertRef.value.open({ status: "error", message: err.message });
     } finally {

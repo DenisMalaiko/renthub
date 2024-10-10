@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
+    "@pinia/nuxt": "^0.5.5",
     "@types/node": "^20.14.9",
     "@vue/tsconfig": "^0.5.1",
     "nuxt": "^3.12.2",
+    "pinia": "^2.2.4",
     "vue": "^3.4.31",
     "vuetify": "^3.6.11",
-    "vuetify-nuxt-module": "^0.14.1"
+    "vuetify-nuxt-module": "^0.14.1",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.4.31",
