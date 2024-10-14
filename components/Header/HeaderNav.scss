@@ -20,5 +20,8 @@
   &-menu-list {
     display: flex;
     justify-content: flex-end;
+    li:first-child {
+      margin-right: 5px;
+    }
   }
 }

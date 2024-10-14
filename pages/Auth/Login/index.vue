@@ -17,6 +17,9 @@
             <v-text-field
               v-model="signInForm.password"
               :rules="rules.password"
+              :append-icon="password.isShowRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="password.isShowRepeatPassword ? 'text' : 'password'"
+              @click:append="password.isShowRepeatPassword = !password.isShowRepeatPassword"
               label="Password"
               class="mb-2"
             ></v-text-field>
@@ -56,6 +59,7 @@ const {
   rules,
   login,
   toastAlertRef,
-  loading
+  loading,
+  password
 } = useLoginLogic();
 </script>

@@ -15,7 +15,16 @@
         <v-col cols="3">
           <div class="header-menu">
             <ul class="header-menu-list">
-              <li>
+              <li v-if="user?.token?.length">
+                <NuxtLink to="/auth/profile">
+                  <b> {{user.name}} </b>
+                </NuxtLink>
+                |
+              </li>
+              <li v-if="user?.token?.length">
+                <b> Logout </b>
+              </li>
+              <li v-if="!user?.token?.length">
                 <NuxtLink to="/auth/login">
                   <b> Login </b>
                 </NuxtLink>
@@ -28,10 +37,10 @@
   </nav>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
+<script lang="ts" setup>
+import { useHeaderLogic } from "./HeaderNav";
 
-const logo = ref("RentHub")
+const { logo, user } = useHeaderLogic();
 </script>
 
 <style src="./HeaderNav.scss" lang="scss" scoped></style>
