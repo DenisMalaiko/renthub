@@ -14,6 +14,11 @@ export function useLoginLogic() {
     creating: false
   })
 
+  const password = reactive({
+    isShowPassword: false,
+    isShowRepeatPassword: false
+  });
+
   const rules = computed(() => {
     return {
       email: [ValidationsRules.required],
@@ -63,6 +68,7 @@ export function useLoginLogic() {
     rules,
     login,
     toastAlertRef,
-    loading
+    loading,
+    password
   }
 }

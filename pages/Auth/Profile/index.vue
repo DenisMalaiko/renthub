@@ -1,10 +1,15 @@
 <template>
-  <section class="auth profile">
+  <section class="section">
     <v-container>
-      <v-row class="justify-center">
+      <v-row>
         <v-col cols="4">
-          <h1>Profile:</h1>
+          <h2>{{ user.name }}</h2>
+          <p>{{ user.login }}</p>
+
+
+          <br><br><br>
           <pre>{{ user }}</pre>
+
         </v-col>
       </v-row>
     </v-container>
