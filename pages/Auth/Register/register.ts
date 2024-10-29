@@ -1,7 +1,7 @@
 import { reactive, ref, computed, watch } from "vue";
 import { ValidationsRules } from "~/utils/validations-rules";
-import { User } from "~/models/User";
 import { useRouter } from "nuxt/app";
+import {UserRegister} from "~/models/user/UserRegister";
 
 export function useRegisterLogic() {
   const router = useRouter()
@@ -18,7 +18,7 @@ export function useRegisterLogic() {
   });
 
   let cities = ref([]);
-  let signUpForm = reactive(new User());
+  let signUpForm = reactive(new UserRegister());
 
   const rules = computed(() => {
     return {

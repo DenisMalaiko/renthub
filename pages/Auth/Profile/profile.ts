@@ -1,9 +1,18 @@
 import {UserModule} from "~/store";
-import {reactive} from "vue/dist/vue";
+import {onMounted} from "vue";
+import {UserProfile} from "~/models/user/UserProfile";
+import {useRouter} from "nuxt/app";
 
 export function useProfileLogic() {
+  const router = useRouter()
   const userModule = UserModule();
-  const user = userModule.user;
+  const user: UserProfile = userModule.user;
+
+  onMounted(() => {
+    if(!user.token) {
+      router.push('/auth/login')
+    }
+  })
 
   return {
     user
