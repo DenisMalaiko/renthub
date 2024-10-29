@@ -16,3 +16,17 @@ ol {
 .section {
   padding-top: 70px;
 }
+
+.link {
+  color: rgba(0,0,0,0.6) !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.link a {
+  color: inherit;
+}
+
+.link:hover {
+  color: rgb(24,103,192) !important;
+}

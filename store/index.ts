@@ -1,13 +1,16 @@
 import {defineStore} from "pinia";
-import {User} from "~/models/User";
+import {UserProfile} from "~/models/user/UserProfile";
 
-export const UserModule = defineStore('counter', {
+export const UserModule = defineStore('userModule', {
   state: () => ({
-    user: {},
+    user: JSON.parse(JSON.stringify(new UserProfile())),
   }),
   actions: {
-    setUser(user: User) {
+    setUser(user: UserProfile) {
       this.user = user;
     },
+    logoutUser() {
+      this.user = {}
+    }
   },
 })

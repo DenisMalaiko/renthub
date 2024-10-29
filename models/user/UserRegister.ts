@@ -1,17 +1,13 @@
+import {User} from "~/models/user/User";
 import {City} from "~/models/City";
 
-export class User {
-  name: string;
-  login: string;
-  email: string;
-  city: City;
-  password: string;
+export class UserRegister extends User {
+  city?: City;
+  password?: string;
   repeatPassword?: string;
 
   constructor() {
-    this.name = "";
-    this.login = "";
-    this.email = "";
+    super()
     this.city = new City();
     this.password = "";
     this.repeatPassword = "";

@@ -15,16 +15,16 @@
         <v-col cols="3">
           <div class="header-menu">
             <ul class="header-menu-list">
-              <li v-if="user?.token?.length">
+              <li v-if="user?.token?.length" class="link" >
                 <NuxtLink to="/auth/profile">
                   <b> {{user.name}} </b>
                 </NuxtLink>
                 |
               </li>
-              <li v-if="user?.token?.length">
+              <li v-if="user?.token?.length" @click="logout" class="link" >
                 <b> Logout </b>
               </li>
-              <li v-if="!user?.token?.length">
+              <li v-if="!user?.token?.length" class="link" >
                 <NuxtLink to="/auth/login">
                   <b> Login </b>
                 </NuxtLink>
@@ -37,10 +37,10 @@
   </nav>
 </template>
 
-<script lang="ts" setup>
-import { useHeaderLogic } from "./HeaderNav";
+<script setup lang="ts">
+import { useHeaderLogic } from "./HeaderNav.ts";
 
-const { logo, user } = useHeaderLogic();
+const { logo, user, logout } = useHeaderLogic();
 </script>
 
 <style src="./HeaderNav.scss" lang="scss" scoped></style>
