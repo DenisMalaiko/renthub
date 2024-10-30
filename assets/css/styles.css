@@ -18,9 +18,10 @@ ol {
 }
 
 .link {
-  color: rgba(0,0,0,0.6) !important;
+  color: #000000 !important;
   transition: all 0.3s ease;
   cursor: pointer;
+  font-weight: 200;
 }
 
 .link a {
