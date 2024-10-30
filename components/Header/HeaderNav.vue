@@ -5,7 +5,7 @@
         <v-col cols="2">
           <div class="header-logo">
             <NuxtLink to="/">
-              <b> {{ logo }} </b>
+              <b class="link"> {{ logo }} </b>
             </NuxtLink>
           </div>
         </v-col>
