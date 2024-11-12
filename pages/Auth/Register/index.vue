@@ -82,6 +82,9 @@
               <span>
                 Have an account?
                 <NuxtLink to="login">Sign In</NuxtLink>
+                <br>
+                Or can go back to
+                <NuxtLink to="/">Home</NuxtLink>
               </span>
             </div>
           </v-form>
@@ -95,7 +98,12 @@
 
 <script lang="ts" setup>
 import { useRegisterLogic } from './register';
+import { definePageMeta } from "~/.nuxt/imports";
 import ToastAlert from "~/components/Toast/ToastAlert.vue";
+
+definePageMeta({
+  layout: 'auth'
+})
 
 const {
   signUpFormRef,

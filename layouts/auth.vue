@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <HeaderNav />
-
     <v-main>
       <NuxtPage />
     </v-main>
@@ -9,7 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import HeaderNav from "~/components/Header/HeaderNav.vue";
 </script>
 
 <style scoped></style>
