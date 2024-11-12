@@ -1,10 +1,10 @@
 <template>
   <section class="profile-section">
-    Profile
+    Products
   </section>
 </template>
 
-<script lang="ts" setup>
+<script>
 import {definePageMeta} from "~/.nuxt/imports";
 
 definePageMeta({
@@ -13,7 +13,5 @@ definePageMeta({
 </script>
 
 <style>
-.profile-section {
-  padding: 20px;
-}
+
 </style>

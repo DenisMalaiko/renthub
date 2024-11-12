@@ -13,7 +13,6 @@ export function useLoginLogic() {
   const loading = reactive({
     creating: false
   })
-
   const password = reactive({
     isShowPassword: false,
     isShowRepeatPassword: false
