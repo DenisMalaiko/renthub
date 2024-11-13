@@ -49,4 +49,12 @@ onMounted(() => {
 .profile-name {
   padding: 10px 16px !important;
 }
+
+.profile-section {
+  padding: 20px;
+}
+
+.profile-section-list li {
+  margin-bottom: 5px;
+}
 </style>
