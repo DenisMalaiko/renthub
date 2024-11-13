@@ -4,7 +4,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts" setup>
 import {definePageMeta} from "~/.nuxt/imports";
 
 definePageMeta({
@@ -13,5 +13,4 @@ definePageMeta({
 </script>
 
 <style>
-
 </style>
