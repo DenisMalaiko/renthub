@@ -5,11 +5,14 @@ export class UserProfile extends User {
   token: string;
   tokenExpiration: number;
 
-  constructor() {
+  constructor(_id: string, token: string, tokenExpiration: number, name: string, login: string, email: string) {
     super()
-    this._id = "";
-    this.token = "";
-    this.tokenExpiration = 0;
+    this._id = _id ?? "";
+    this.token = token ?? "";
+    this.tokenExpiration = tokenExpiration ?? 0;
+    this.name = name ?? "";
+    this.login = login ?? "";
+    this.email = email ?? "";
   }
 
   clear() {

@@ -8,9 +8,7 @@ export function useProfileLogic() {
   const profileDlgRef = ref();
 
   function editProfile() {
-    console.log("EDIT PROFILE")
-    console.log(profileDlgRef.value)
-    profileDlgRef.value.open()
+    profileDlgRef.value.open(user);
   }
 
   return {
