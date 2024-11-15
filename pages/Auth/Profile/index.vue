@@ -11,7 +11,7 @@
         <b>Email: </b> {{ user.email }}
       </li>
       <li>
-        <b>City: </b> {{ user.city.fullAddress }}
+        <b>City: </b> {{ user.city?.fullAddress }}
       </li>
     </ul>
 
