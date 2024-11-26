@@ -5,7 +5,7 @@ import {UserProfile} from "~/models/user/UserProfile";
 export function useProfileDlgLogic() {
   const dialog = ref(false);
   const editProfileFormRef = ref();
-  let editProfileForm;
+  let editProfileForm = ref<UserProfile | null>(null);
 
   const rules = computed(() => {
     return {
@@ -19,17 +19,17 @@ export function useProfileDlgLogic() {
   function open(profile: any): void {
     dialog.value = true;
 
-    console.log(profile.name)
-    editProfileForm = reactive(new UserProfile(
-      profile._id,
-      profile.token,
-      profile.tokenExpiration,
-      profile.name,
-      profile.login,
-      profile.email
-    ));
-
-    console.log("editProfileForm ", editProfileForm)
+    editProfileForm.value = reactive(
+      new UserProfile(
+        profile._id,
+        profile.token,
+        profile.tokenExpiration,
+        profile.name,
+        profile.login,
+        profile.email,
+        profile.city
+      )
+    )
   }
 
   function close(): void {

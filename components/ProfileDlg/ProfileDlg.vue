@@ -7,6 +7,27 @@
 
       <v-form ref="editProfileFormRef" @submit.prevent="editProfile()">
         <v-card-text>
+          <v-text-field
+            v-model="editProfileForm.name"
+            :rules="rules.name"
+            label="Name"
+            class="mb-2"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="editProfileForm.login"
+            :rules="rules.login"
+            label="Login"
+            class="mb-2"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="editProfileForm.email"
+            :rules="rules.email"
+            label="Email"
+            class="mb-2"
+          ></v-text-field>
+
           <pre>{{editProfileForm}}</pre>
         </v-card-text>
 
