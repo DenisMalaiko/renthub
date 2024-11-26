@@ -32,7 +32,7 @@ export function useLoginLogic() {
     loading.creating = true;
 
     const requestBody = {
-      query: `query { login(email: "${signInForm.email}", password: "${signInForm.password}") { _id token tokenExpiration name login email city { fullAddress } } }`
+      query: `query { login(email: "${signInForm.email}", password: "${signInForm.password}") { _id token tokenExpiration name login email city { cityId cityName countryId countryName fullAddress } } }`
     }
 
     try {
