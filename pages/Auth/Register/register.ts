@@ -6,10 +6,8 @@ import {UserRegister} from "~/models/user/UserRegister";
 export function useRegisterLogic() {
   const router = useRouter()
   const signUpFormRef = ref();
-  const searchCityQuery = ref('');
   const toastAlertRef = ref();
   const loading = reactive({
-    city: false,
     creating: false
   });
   const password = reactive({
@@ -17,7 +15,6 @@ export function useRegisterLogic() {
     isShowRepeatPassword: false
   });
 
-  let cities = ref([]);
   let signUpForm = reactive(new UserRegister());
 
   const rules = computed(() => {
@@ -52,19 +49,6 @@ export function useRegisterLogic() {
         return { color: "red", value: 0 };
     }
   });
-
-  async function searchPlaces(city: string) {
-    const url = `http://localhost:8080/searchCity?city=${city}`;
-    try {
-      loading.city = true;
-      const response = await fetch(url);
-      const data = await response.json();
-      cities.value = data;
-      loading.city = false;
-    } catch (error) {
-      console.error('Помилка при пошуку міста:', error);
-    }
-  }
 
   function calculateScore(password: string) {
     return rules.value.password.reduce((count, rule) => {
@@ -104,17 +88,9 @@ export function useRegisterLogic() {
     }
   }
 
-  watch(searchCityQuery, (newValue) => {
-    if (newValue && newValue.length >= 3) {
-      searchPlaces(newValue);
-    }
-  });
-
   return {
     signUpFormRef,
     signUpForm,
-    searchCityQuery,
-    cities,
     loading,
     password,
     rules,

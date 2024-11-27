@@ -6,7 +6,7 @@
       </v-card-title>
 
       <v-form ref="editProfileFormRef" @submit.prevent="editProfile()">
-        <v-card-text>
+        <v-card-text class="pb-0">
           <v-text-field
             v-model="editProfileForm.name"
             :rules="rules.name"
@@ -28,15 +28,24 @@
             class="mb-2"
           ></v-text-field>
 
-          <pre>{{editProfileForm}}</pre>
+          <v-combobox
+            v-model="editProfileForm.city"
+            v-model:search="searchCityQuery"
+            :items="cities"
+            :rules="rules.city"
+            item-title="fullAddress"
+            label="City"
+            :loading="loadingCity"
+            class="mb-2"
+          />
         </v-card-text>
 
-        <v-card-actions>
+        <v-card-actions class="justify-end px-3 pt-0 pb-3">
           <v-btn @click="close()" color="primary">
             Close
           </v-btn>
 
-          <v-btn type="submit" color="primary">
+          <v-btn type="submit" variant="flat" color="primary">
             Save
           </v-btn>
         </v-card-actions>
@@ -47,7 +56,9 @@
 
 <script setup lang="ts">
 import { useProfileDlgLogic } from "./ProfileDlg.ts";
+import CitiesMixin from "~/composables/Cities";
 
+const { cities, searchCityQuery, loadingCity } = CitiesMixin();
 const { dialog, editProfileFormRef, editProfileForm, rules, open, close, editProfile } = useProfileDlgLogic();
 
 defineExpose({

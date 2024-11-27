@@ -36,7 +36,7 @@
               :rules="rules.city"
               item-title="fullAddress"
               label="City"
-              :loading="loading.city"
+              :loading="loadingCity"
               class="mb-2"
             />
 
@@ -99,17 +99,18 @@
 <script lang="ts" setup>
 import { useRegisterLogic } from './register';
 import { definePageMeta } from "~/.nuxt/imports";
+import CitiesMixin from "~/composables/Cities";
 import ToastAlert from "~/components/Toast/ToastAlert.vue";
 
 definePageMeta({
   layout: 'auth'
-})
+});
+
+const { cities, searchCityQuery, loadingCity } = CitiesMixin();
 
 const {
   signUpFormRef,
   signUpForm,
-  searchCityQuery,
-  cities,
   loading,
   password,
   rules,
