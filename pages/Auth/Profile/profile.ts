@@ -1,14 +1,16 @@
-import {UserModule} from "~/store";
-import {UserProfile} from "~/models/user/UserProfile";
-import {ref} from "vue";
+import { ref, computed } from "vue";
+import { UserModule } from "~/store";
 
 export function useProfileLogic() {
   const userModule = UserModule();
-  const user: UserProfile = userModule.user;
   const profileDlgRef = ref();
 
+  const user = computed(() => {
+    return userModule.user;
+  })
+
   function editProfile() {
-    profileDlgRef.value.open(user);
+    profileDlgRef.value.open(user.value);
   }
 
   return {

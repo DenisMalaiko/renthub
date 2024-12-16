@@ -9,6 +9,12 @@ export const UserModule = defineStore('userModule', {
     setUser(user: UserProfile) {
       this.user = user;
     },
+    updateUser(user: UserProfile) {
+      this.user = {
+        ...this.user,
+        ...user
+      }
+    },
     logoutUser() {
       this.user = {}
     }

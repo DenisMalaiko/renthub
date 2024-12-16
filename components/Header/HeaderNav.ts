@@ -1,13 +1,11 @@
 import { ref, computed } from 'vue';
 import { UserModule } from "~/store";
 import { useRouter } from "nuxt/app";
-import {UserProfile} from "~/models/user/UserProfile";
 
 export function useHeaderLogic() {
   const userModule = UserModule();
   const router = useRouter();
 
-  //const user = userModule.user;
   const user = computed(() => {
     return userModule.user;
   })
