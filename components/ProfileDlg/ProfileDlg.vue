@@ -45,21 +45,24 @@
             Close
           </v-btn>
 
-          <v-btn type="submit" variant="flat" color="primary">
+          <v-btn type="submit" variant="flat" :loading="loading" color="primary">
             Save
           </v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
+
+    <ToastAlert ref="toastAlertRef"/>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
 import { useProfileDlgLogic } from "./ProfileDlg.ts";
 import CitiesMixin from "~/composables/Cities";
+import ToastAlert from "~/components/Toast/ToastAlert.vue";
 
 const { cities, searchCityQuery, loadingCity } = CitiesMixin();
-const { dialog, editProfileFormRef, editProfileForm, rules, open, close, editProfile } = useProfileDlgLogic();
+const { dialog, editProfileFormRef, editProfileForm, rules, open, close, editProfile, loading, toastAlertRef } = useProfileDlgLogic();
 
 defineExpose({
   open

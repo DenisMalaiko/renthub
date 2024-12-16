@@ -4,7 +4,7 @@ export class User {
   name: string;
   login: string;
   email: string;
-  city?: City;
+  city?: City | null;
 
   constructor() {
     this.name = "";

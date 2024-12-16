@@ -6,7 +6,7 @@ export class UserProfile extends User {
   token: string;
   tokenExpiration: number;
 
-  constructor(_id: string, token: string, tokenExpiration: number, name: string, login: string, email: string, city: City) {
+  constructor(_id?: string, token?: string, tokenExpiration?: number, name?: string, login?: string, email?: string, city?: City) {
     super()
     this._id = _id ?? "";
     this.token = token ?? "";
