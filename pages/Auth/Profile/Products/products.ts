@@ -1,41 +1,20 @@
-import {onMounted, reactive} from "vue";
+import {onMounted, ref} from "vue";
+import {ProductModule} from "~/store";
 
 export function useProductsLogic() {
-  let list: any = reactive([]);
+  const productDlgRef = ref();
+  const product = ProductModule();
 
-  async function getCategories() {
-    const requestBody = {
-      query: `query {
-        categories {
-          _id
-          name
-        }
-      }`
-    }
-
-    try {
-      const response = await fetch('http://localhost:8080/graphql', {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-        headers: {'Content-Type': 'application/json'},
-      });
-      const responseData: any = await response.json();
-
-      console.log("SUCCESS ", responseData.data.categories)
-
-      list.splice(0, list.length, ...responseData.data.categories);
-    } catch (err) {
-      console.log("ERROR ", err)
-    }
+  function addProduct() {
+    productDlgRef.value.open();
   }
 
   onMounted(async () => {
-    console.log("START MOUNTED")
-    await getCategories();
-    console.log("FINISH MOUNTED")
+    await product.getCategories();
   })
 
   return {
-    list
+    addProduct,
+    productDlgRef
   }
 }
