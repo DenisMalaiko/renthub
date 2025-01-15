@@ -15,7 +15,7 @@
           ></v-text-field>
 
           <v-text-field
-            v-model="addProductForm.price"
+            v-model.number="addProductForm.price"
             :rules="rules.price"
             label="Price"
             class="mb-2"

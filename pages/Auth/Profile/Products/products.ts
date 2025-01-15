@@ -1,20 +1,27 @@
-import {onMounted, ref} from "vue";
-import {ProductModule} from "~/store";
+import {computed, onMounted, ref} from "vue";
+import {ProductModule, CategoryModule} from "~/store";
 
 export function useProductsLogic() {
   const productDlgRef = ref();
-  const product = ProductModule();
+  const productModule = ProductModule();
+  const categoryModule = CategoryModule()
+
+  const products = computed(() => {
+    return productModule.products;
+  })
 
   function addProduct() {
     productDlgRef.value.open();
   }
 
   onMounted(async () => {
-    await product.getCategories();
+    await categoryModule.getCategories();
+    await productModule.getProducts();
   })
 
   return {
     addProduct,
-    productDlgRef
+    productDlgRef,
+    products
   }
 }

@@ -6,6 +6,10 @@
       </v-col>
     </v-row>
 
+    <v-row>
+      <pre>{{products}}</pre>
+    </v-row>
+
     <ProductDlg ref="productDlgRef"/>
   </section>
 </template>
@@ -21,7 +25,8 @@ definePageMeta({
 
 const {
   addProduct,
-  productDlgRef
+  productDlgRef,
+  products
 } = useProductsLogic();
 </script>
 
