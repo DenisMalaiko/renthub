@@ -50,32 +50,31 @@ export function useProfileDlgLogic() {
 
     const requestBody = {
       query: `mutation { 
-        updateUser(userUpdateInput:
-          {
-            _id: "${formValue._id}",
-            name: "${formValue.name}",
-            login: "${formValue.login}",
-            email: "${formValue.email}",
-            city: {
-              cityId: "${formValue.city.cityId}",
-              cityName: "${formValue.city.cityName}",
-              countryId: "${formValue.city.countryId}",
-              countryName: "${formValue.city.countryName}",
-              fullAddress: "${formValue.city.fullAddress}"} 
-            }) { 
-              _id
-              name
-              login
-              email
-              city {
-                cityId
-                cityName
-                countryId
-                countryName
-                fullAddress
-              }
+        updateUser(userUpdateInput:{
+          _id: "${formValue?._id}",
+          name: "${formValue?.name}",
+          login: "${formValue?.login}",
+          email: "${formValue?.email}",
+          city: {
+            cityId: "${formValue?.city?.cityId}",
+            cityName: "${formValue?.city?.cityName}",
+            countryId: "${formValue?.city?.countryId}",
+            countryName: "${formValue?.city?.countryName}",
+            fullAddress: "${formValue?.city?.fullAddress}"} 
+          }) { 
+            _id
+            name
+            login
+            email
+            city {
+              cityId
+              cityName
+              countryId
+              countryName
+              fullAddress
             }
-          }`
+          }
+        }`
     };
 
     try {
@@ -86,7 +85,7 @@ export function useProfileDlgLogic() {
       });
       const responseData = await response.json();
 
-      console.log("SUCCESS ", responseData.data.updateUser)
+      console.log("SUCCESS ", responseData)
 
       if (!response.ok) {
         throw new Error(responseData.errors ? responseData.errors.map((e: any) => e.message).join(', ') : 'Unknown error');
