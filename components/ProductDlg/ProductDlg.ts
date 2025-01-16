@@ -18,6 +18,7 @@ export function useProductLogic() {
       name: [ValidationsRules.required],
       price: [ValidationsRules.required],
       categories: [ValidationsRules.required],
+      photo: [ValidationsRules.required, ValidationsRules.photoSize]
     }
   });
 

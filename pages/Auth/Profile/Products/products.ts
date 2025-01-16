@@ -6,8 +6,8 @@ export function useProductsLogic() {
   const productModule = ProductModule();
   const categoryModule = CategoryModule()
 
-  const products = computed(() => {
-    return productModule.products;
+  const productsUser = computed(() => {
+    return productModule.productsUser;
   })
 
   function addProduct() {
@@ -16,12 +16,12 @@ export function useProductsLogic() {
 
   onMounted(async () => {
     await categoryModule.getCategories();
-    await productModule.getProducts();
+    await productModule.getProductsByUser();
   })
 
   return {
     addProduct,
     productDlgRef,
-    products
+    productsUser
   }
 }
