@@ -55,7 +55,8 @@ export const CategoryModule = defineStore('categoryModel', {
 
 export const ProductModule = defineStore('productModule', {
   state: () => ({
-    products: []
+    products: [],
+    productsUser: []
   }),
   actions: {
     async addProduct(product: Product | null) {
@@ -80,21 +81,16 @@ export const ProductModule = defineStore('productModule', {
           body: JSON.stringify(requestBody),
           headers: {'Content-Type': 'application/json'},
         }).then(() => {
-          this.getProducts()
+          this.getProductsByUser()
         })
       } catch (err) {
         return err;
       }
     },
     async getProducts() {
-      const userModule = UserModule();
-      const userId = userModule.user._id;
-
-      console.log("USER ID ", userId)
-
       const requestBody = {
         query: `query {
-          products(userId: "${userId}") {
+          products{
             _id
             name
             price
@@ -115,6 +111,36 @@ export const ProductModule = defineStore('productModule', {
       } catch (err) {
         console.log("ERROR ", err)
       }
-    }
+    },
+    async getProductsByUser() {
+      const userModule = UserModule();
+      const userId = userModule.user._id;
+
+      console.log("USER ID ", userId)
+
+      const requestBody = {
+        query: `query {
+          productsByUser(userId: "${userId}") {
+            _id
+            name
+            price
+            userId
+          }
+        }`
+      };
+
+      try {
+        const response = await fetch('http://localhost:8080/graphql', {
+          method: "POST",
+          body: JSON.stringify(requestBody),
+          headers: {'Content-Type': 'application/json'},
+        });
+        const responseData: any = await response.json();
+
+        this.productsUser = responseData.data.productsByUser;
+      } catch (err) {
+        console.log("ERROR ", err)
+      }
+    },
   }
 })

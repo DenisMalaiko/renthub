@@ -5,11 +5,13 @@ export class Product {
   price: number | null;
   categories?: [] | null;
   userId: string | null;
+  photo: File | string | null;
 
   constructor(userId: string) {
     this.name = null;
     this.price = null;
     this.categories = null;
     this.userId = userId ?? null;
+    this.photo = null;
   }
 }

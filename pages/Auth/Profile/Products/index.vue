@@ -7,7 +7,15 @@
     </v-row>
 
     <v-row>
-      <pre>{{products}}</pre>
+      <v-col v-for="product in productsUser" cols="3">
+        <v-card>
+          <img src="" alt="no image">
+          <v-card-text>
+            <p>{{product.name}}</p>
+            <b>{{product.price}} $</b>
+          </v-card-text>
+        </v-card>
+      </v-col>
     </v-row>
 
     <ProductDlg ref="productDlgRef"/>
@@ -26,7 +34,7 @@ definePageMeta({
 const {
   addProduct,
   productDlgRef,
-  products
+  productsUser
 } = useProductsLogic();
 </script>
 
