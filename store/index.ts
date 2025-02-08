@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {UserProfile} from "~/models/user/UserProfile";
 import {Product} from "~/models/Product";
+import {checkCachedProducts} from "~/utils/cachedResponse";
 
 export const UserModule = defineStore('userModule', {
   state: () => ({
@@ -55,7 +56,8 @@ export const CategoryModule = defineStore('categoryModel', {
 
 export const ProductModule = defineStore('productModule', {
   state: () => ({
-    products: []
+    products: [],
+    productsUser: []
   }),
   actions: {
     async addProduct(product: Product | null) {
@@ -80,13 +82,41 @@ export const ProductModule = defineStore('productModule', {
           body: JSON.stringify(requestBody),
           headers: {'Content-Type': 'application/json'},
         }).then(() => {
-          this.getProducts()
+          this.getProductsByUser()
         })
       } catch (err) {
         return err;
       }
     },
     async getProducts() {
+      const requestBody = {
+        query: `query {
+          products{
+            _id
+            name
+            price
+            userId
+          }
+        }`
+      };
+
+      try {
+        const response = await fetch('http://localhost:8080/graphql', {
+          method: "POST",
+          body: JSON.stringify(requestBody),
+          headers: {'Content-Type': 'application/json'},
+        });
+
+        const responseData: any = await response.json();
+        const cachedProducts: Product[] | [] = await checkCachedProducts(requestBody);
+        this.products = responseData.data.products ?? cachedProducts;
+      } catch (err) {
+        console.log("ERROR ", err)
+        const cachedProducts: Product[] | [] | any = await checkCachedProducts(requestBody);
+        this.products = cachedProducts;
+      }
+    },
+    async getProductsByUser() {
       const userModule = UserModule();
       const userId = userModule.user._id;
 
@@ -94,7 +124,7 @@ export const ProductModule = defineStore('productModule', {
 
       const requestBody = {
         query: `query {
-          products(userId: "${userId}") {
+          productsByUser(userId: "${userId}") {
             _id
             name
             price
@@ -111,10 +141,10 @@ export const ProductModule = defineStore('productModule', {
         });
         const responseData: any = await response.json();
 
-        this.products = responseData.data.products;
+        this.productsUser = responseData.data.productsByUser;
       } catch (err) {
         console.log("ERROR ", err)
       }
-    }
+    },
   }
 })

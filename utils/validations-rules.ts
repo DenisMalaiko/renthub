@@ -8,4 +8,7 @@ export const ValidationsRules = {
     return pattern.test(v) || 'Invalid e-mail.'
   },
   match: (v1: string, v2: string | any, text: string) => v1 === v2 || `${text} do not match`,
+  photoSize: (value: any) => {
+    return !value || !value.length || value[0].size < 2000000 || 'Avatar size should be less than 2 MB!'
+  }
 }

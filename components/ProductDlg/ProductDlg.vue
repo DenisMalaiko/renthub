@@ -31,6 +31,17 @@
             class="mb-2"
             multiple
           />
+
+          <v-file-input
+            v-model="addProductForm.photo"
+            :rules="rules.photo"
+            accept="image/png, image/jpeg, image/bmp"
+            label="Avatar"
+            placeholder="Pick an avatar"
+            prepend-icon="mdi-camera"
+          ></v-file-input>
+
+          <pre>{{addProductForm}}</pre>
         </v-card-text>
 
         <v-card-actions class="justify-end px-3 pt-0 pb-3">
