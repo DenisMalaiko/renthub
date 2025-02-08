@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {UserProfile} from "~/models/user/UserProfile";
 import {Product} from "~/models/Product";
+import {checkCachedProducts} from "~/utils/cachedResponse";
 
 export const UserModule = defineStore('userModule', {
   state: () => ({
@@ -105,11 +106,14 @@ export const ProductModule = defineStore('productModule', {
           body: JSON.stringify(requestBody),
           headers: {'Content-Type': 'application/json'},
         });
-        const responseData: any = await response.json();
 
-        this.products = responseData.data.products;
+        const responseData: any = await response.json();
+        const cachedProducts: Product[] | [] = await checkCachedProducts(requestBody);
+        this.products = responseData.data.products ?? cachedProducts;
       } catch (err) {
         console.log("ERROR ", err)
+        const cachedProducts: Product[] | [] | any = await checkCachedProducts(requestBody);
+        this.products = cachedProducts;
       }
     },
     async getProductsByUser() {

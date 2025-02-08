@@ -8,6 +8,10 @@ export function useHomeLogic() {
     return productModule.products;;
   })
 
+  console.log("--------")
+  console.log("MOUNTED")
+  console.log("--------")
+
   onMounted(async () => {
     await productModule.getProducts();
   });

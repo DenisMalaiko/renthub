@@ -1,6 +1,6 @@
 <template>
-  <NuxtLayout>
-  </NuxtLayout>
+  <NuxtPwaManifest></NuxtPwaManifest>
+  <NuxtLayout></NuxtLayout>
 </template>
 
 <script lang="ts" setup>
