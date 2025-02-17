@@ -21,13 +21,15 @@
             class="mb-2"
           ></v-text-field>
 
-          <v-combobox
+          <v-select
             v-model="addProductForm.categories"
             v-model:search="searchCategoryQuery"
             :items="categories"
-            :rules="rules.categories"
             item-title="name"
+            item-value="_id"
+            :rules="rules.categories"
             label="Categories"
+            color="primary"
             class="mb-2"
             multiple
           />

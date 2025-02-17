@@ -65,13 +65,23 @@ export const ProductModule = defineStore('productModule', {
         query: `mutation {
           createProduct(productInput: {
             name: "${product?.name}",
-            price: ${product?.price}
-            userId: "${product?.userId}"
+            price: ${product?.price},
+            user: "${product?.user}",
+            categories: ${JSON.stringify(product?.categories)}
           }) {
             _id
             name
             price
-            userId
+            user {
+              _id
+              name
+              login
+              email
+            }
+            categories {
+              _id
+              name
+            }
           }
         }`
       };
@@ -95,7 +105,16 @@ export const ProductModule = defineStore('productModule', {
             _id
             name
             price
-            userId
+            user {
+              _id
+              name
+              login
+              email
+            }
+            categories {
+              _id
+              name
+            }
           }
         }`
       };
@@ -119,16 +138,22 @@ export const ProductModule = defineStore('productModule', {
     async getProductsByUser() {
       const userModule = UserModule();
       const userId = userModule.user._id;
-
-      console.log("USER ID ", userId)
-
       const requestBody = {
         query: `query {
           productsByUser(userId: "${userId}") {
             _id
             name
             price
-            userId
+            user {
+              _id
+              name
+              login
+              email
+            }
+            categories {
+              _id
+              name
+            }
           }
         }`
       };
