@@ -37,7 +37,7 @@
           <v-file-input
             v-model="addProductForm.photo"
             :rules="rules.photo"
-            accept="image/png, image/jpeg, image/bmp"
+            accept="image/*"
             label="Avatar"
             placeholder="Pick an avatar"
             prepend-icon="mdi-camera"

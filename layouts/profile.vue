@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import {UserModule} from "~/store";
+import { UserModule } from "~/store/user";
 import {UserProfile} from "~/models/user/UserProfile";
 import HeaderNav from "~/components/Header/HeaderNav.vue";
 import {onMounted} from "vue";

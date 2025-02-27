@@ -1,5 +1,7 @@
 import {computed, onMounted, ref} from "vue";
-import {ProductModule, CategoryModule} from "~/store";
+import { CategoryModule } from "~/store/categories";
+import { ProductModule } from "~/store/products";
+
 
 export function useProductsLogic() {
   const productDlgRef = ref();

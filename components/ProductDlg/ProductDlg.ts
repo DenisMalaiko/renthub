@@ -1,7 +1,9 @@
 import {computed, reactive, ref} from "vue";
 import {Product} from "~/models/Product";
 import {ValidationsRules} from "~/utils/validations-rules";
-import {ProductModule, UserModule, CategoryModule} from "~/store";
+import { UserModule } from "~/store/user";
+import { CategoryModule } from "~/store/categories";
+import { ProductModule } from "~/store/products";
 
 export function useProductLogic() {
   const productModule = ProductModule();

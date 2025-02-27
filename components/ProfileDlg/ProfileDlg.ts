@@ -1,7 +1,7 @@
 import {computed, reactive, ref} from "vue";
 import {ValidationsRules} from "~/utils/validations-rules";
 import {UserProfile} from "~/models/user/UserProfile";
-import {UserModule} from "~/store";
+import {UserModule} from "~/store/user";
 
 export function useProfileDlgLogic() {
   const dialog = ref(false);
