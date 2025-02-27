@@ -1,5 +1,5 @@
 import { ref, computed } from "vue";
-import { UserModule } from "~/store";
+import { UserModule} from "~/store/user";
 
 export function useProfileLogic() {
   const userModule = UserModule();

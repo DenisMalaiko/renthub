@@ -5,7 +5,7 @@ export class Product {
   price: number | null;
   categories?: [] | null;
   user: string | null;
-  photo: File | string | null;
+  photo: File | BlobPart | string | null | any;
 
   constructor(user: string) {
     this.name = null;

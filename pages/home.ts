@@ -1,4 +1,4 @@
-import {ProductModule} from "~/store";
+import {ProductModule} from "~/store/products";
 import {computed, onMounted} from "vue";
 
 export function useHomeLogic() {
@@ -7,10 +7,6 @@ export function useHomeLogic() {
   const products = computed(() => {
     return productModule.products;;
   })
-
-  console.log("--------")
-  console.log("MOUNTED")
-  console.log("--------")
 
   onMounted(async () => {
     await productModule.getProducts();

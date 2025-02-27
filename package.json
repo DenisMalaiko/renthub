@@ -10,10 +10,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.1",
     "@googlemaps/google-maps-services-js": "^3.4.0",
     "@pinia/nuxt": "^0.5.5",
     "@types/node": "^20.14.9",
+    "@vue/apollo-composable": "^4.2.1",
     "@vue/tsconfig": "^0.5.1",
+    "apollo-upload-client": "^18.0.1",
+    "graphql": "^16.10.0",
     "nuxt": "^3.12.2",
     "pinia": "^2.2.4",
     "vue": "^3.4.31",

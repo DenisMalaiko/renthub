@@ -3,21 +3,28 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/', // Якщо твій проєкт не хоститься в підпапці
   },
+
   nitro: {
     preset: 'node-server', // Або 'static' для повністю статичного білду
   },
+
   devtools: { enabled: false },
+
   modules: [
     "vuetify-nuxt-module",
     "@pinia/nuxt",
     "@vite-pwa/nuxt"
   ],
-  ssr: false, // Вимикає SSR (важливо для PWA)
+
+  // Вимикає SSR (важливо для PWA)
+  ssr: false,
+
   vite: {
     optimizeDeps: {
       include: ['vuetify'],
     },
   },
+
   pwa: {
     //registerType: 'autoUpdate',
     manifest: {
@@ -74,6 +81,7 @@ export default defineNuxtConfig({
       type: "module"
     }
   },
+
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     treeShake: true,
@@ -98,10 +106,12 @@ export default defineNuxtConfig({
       }
     }
   },
+
   typescript: {
     shim: false,
     strict: true
   },
+
   build: {
     transpile: ['vue'],
     loaders: {
@@ -110,8 +120,11 @@ export default defineNuxtConfig({
       }
     }
   },
+
   css: [
     // Global SCSS file
     '@/assets/css/styles.css'
   ],
+
+  compatibilityDate: '2025-02-25',
 })

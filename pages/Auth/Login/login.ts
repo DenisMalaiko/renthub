@@ -1,7 +1,7 @@
 import {reactive, ref, computed} from "vue";
 import {ValidationsRules} from "~/utils/validations-rules";
 import {Auth} from "~/models/Auth";
-import {UserModule} from "~/store";
+import {UserModule} from "~/store/user";
 import {useRouter} from "nuxt/app";
 
 export function useLoginLogic() {

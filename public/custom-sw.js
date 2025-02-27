@@ -11,7 +11,8 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-    const { request } = event;
+    console.log("FETCH ")
+/*    const { request } = event;
 
     if (request.method === "POST" && request.url.includes("/graphql")) {
         event.respondWith(
@@ -42,40 +43,6 @@ self.addEventListener("fetch", (event) => {
                 }
             })()
         );
-    }
+    }*/
 });
-/*self.addEventListener("fetch", (event) => {
-    const { request } = event;
 
-    if (request.method === "POST" && request.url.includes("/graphql")) {
-        event.respondWith(
-            (async () => {
-                const cache = await caches.open("graphql-cache");
-                const requestClone = request.clone();
-
-                try {
-                    const networkResponse = await fetch(requestClone);
-                    console.log("RESPONSE ", networkResponse);
-
-                    const responseClone = networkResponse.clone();
-                    const responseData = await responseClone.json();
-                    console.log("RESPONSE DATA ", responseData)
-
-                    // Зберігаємо відповідь у кеш
-                    await cache.put(requestClone, responseClone);
-
-                    return networkResponse;
-                } catch (error) {
-                    console.error("Fetch failed, trying cache:", error);
-
-                    const cachedResponse = await cache.match(request);
-                    if (cachedResponse) {
-                        return cachedResponse;
-                    }
-
-                    return new Response("Network error and no cache available", { status: 500 });
-                }
-            })()
-        );
-    }
-});*/
