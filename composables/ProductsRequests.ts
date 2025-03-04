@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import { GET_PRODUCTS, GET_PRODUCTS_BY_USER, GET_CATEGORIES } from "~/graphql/queries";
-import { CREATE_PRODUCT } from "~/graphql/mutations";
+import { CREATE_PRODUCT, UPLOAD_PHOTO } from "~/graphql/mutations";
 
 export const getProducts = async () => {
   return useQuery(GET_PRODUCTS);
@@ -18,4 +18,8 @@ export const addProduct = async () => {
 
 export const getCategories = async () => {
   return useQuery(GET_CATEGORIES);
+}
+
+export const uploadPhoto = async () => {
+  return useMutation(UPLOAD_PHOTO);
 }

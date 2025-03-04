@@ -1,9 +1,11 @@
 import { reactive, ref, computed, watch } from "vue";
 import { ValidationsRules } from "~/utils/validations-rules";
 import { useRouter } from "nuxt/app";
-import {UserRegister} from "~/models/user/UserRegister";
+import { UserRegister } from "~/models/user/UserRegister";
+import { UserModule } from "~/store/user";
 
 export function useRegisterLogic() {
+  const userModule = UserModule();
   const router = useRouter()
   const signUpFormRef = ref();
   const toastAlertRef = ref();
@@ -15,7 +17,7 @@ export function useRegisterLogic() {
     isShowRepeatPassword: false
   });
 
-  let signUpForm = reactive(new UserRegister());
+  let signUpForm: any = reactive(new UserRegister());
 
   const rules = computed(() => {
     return {
@@ -29,7 +31,7 @@ export function useRegisterLogic() {
         ValidationsRules.hasUpperCase,
         ValidationsRules.hasNumber
       ],
-      repeatPassword: [ValidationsRules.required, ValidationsRules.match(signUpForm.password, signUpForm.repeatPassword, "Passwords")],
+      repeatPassword: [ValidationsRules.required, ValidationsRules.match(signUpForm?.password, signUpForm.repeatPassword, "Passwords")],
     };
   });
 
@@ -62,8 +64,24 @@ export function useRegisterLogic() {
 
     loading.creating = true;
 
-    const requestBody = {
-      query: `mutation { createUser(userInput: { name: "${signUpForm.name}", login: "${signUpForm.login}", email: "${signUpForm.email}", city: { cityId: "${signUpForm.city.cityId}", cityName: "${signUpForm.city.cityName}", countryId: "${signUpForm.city.countryId}", countryName: "${signUpForm.city.countryName}", fullAddress: "${signUpForm.city.fullAddress}"}, password: "${signUpForm.password}" }) { _id email } }`
+    try {
+      await userModule.createUser(signUpFormRef);
+
+      console.log("CREATED")
+      toastAlertRef.value.open({ status: "success", message: "User has been successfully created!" });
+      signUpForm.clear();
+      //router.push('/auth/login');
+    } catch (err: any) {
+      toastAlertRef.value.open({ status: "error", message: err.message });
+    } finally {
+      loading.creating = true;
+    }
+
+
+
+
+  /*  const requestBody = {
+      query: `mutation user { createUser(userInput: { name: "${signUpForm.name}", login: "${signUpForm.login}", email: "${signUpForm.email}", city: { cityId: "${signUpForm.city.cityId}", cityName: "${signUpForm.city.cityName}", countryId: "${signUpForm.city.countryId}", countryName: "${signUpForm.city.countryName}", fullAddress: "${signUpForm.city.fullAddress}"}, password: "${signUpForm.password}" }) { _id email } }`
     };
 
     try {
@@ -85,7 +103,7 @@ export function useRegisterLogic() {
       toastAlertRef.value.open({ status: "error", message: err.message });
     } finally {
       loading.creating = true;
-    }
+    }*/
   }
 
   return {

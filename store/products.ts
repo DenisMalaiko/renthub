@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { Product } from "~/models/Product";
-import { addProduct, getProducts, getProductsByUser} from "~/composables/ProductsRequests";
+import { addProduct, getProducts, getProductsByUser } from "~/composables/ProductsRequests";
 import { watchEffect } from "vue";
 import { UserModule } from "~/store/user";
 
@@ -11,6 +11,19 @@ export const ProductModule = defineStore('productModule', {
   }),
   actions: {
     async addProduct(product: Product | null) {
+/*      console.log("START UPLOAD PRODUCT")
+      console.log(product?.photo)
+
+      const { mutate } = await uploadPhoto()
+
+      await mutate({
+        file: product?.photo
+      }).then(() => {
+        console.log("SUCCESS UPLOAD TO SERVER")
+      })*/
+
+
+
       const { mutate } = await addProduct();
 
       await mutate({

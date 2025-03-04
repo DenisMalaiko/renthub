@@ -1,4 +1,4 @@
-import {reactive, ref, computed} from "vue";
+import {reactive, ref, computed } from "vue";
 import {ValidationsRules} from "~/utils/validations-rules";
 import {Auth} from "~/models/Auth";
 import {UserModule} from "~/store/user";
@@ -25,34 +25,16 @@ export function useLoginLogic() {
     }
   })
 
-  async function login(){
+  async function login() {
     const valid = signInFormRef.value.isValid;
     if(!valid) return;
 
     loading.creating = true;
 
-    const requestBody = {
-      query: `query { login(email: "${signInForm.email}", password: "${signInForm.password}") { _id token tokenExpiration name login email city { cityId cityName countryId countryName fullAddress } } }`
-    }
-
     try {
-      const response = await fetch('http://localhost:8080/graphql', {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(responseData.errors ? responseData.errors.map((e: any) => e.message).join(', ') : 'Unknown error');
-      }
-
-      console.log("RESPONSE DATA ", responseData.data.login)
-      user.setUser(responseData.data.login)
+      await user.login(signInForm);
 
       toastAlertRef.value.open({ status: "success", message: "User has been successfully logined!" });
-
       router.push('/auth/profile')
     } catch (err: any) {
       toastAlertRef.value.open({ status: "error", message: err.message });
