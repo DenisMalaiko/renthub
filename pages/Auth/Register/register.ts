@@ -59,18 +59,19 @@ export function useRegisterLogic() {
   }
 
   async function createUser() {
+    const formValue = signUpForm;
     const valid = signUpFormRef.value.isValid;
     if (!valid) return;
 
     loading.creating = true;
 
     try {
-      await userModule.createUser(signUpFormRef);
+      await userModule.createUser(formValue);
 
       console.log("CREATED")
       toastAlertRef.value.open({ status: "success", message: "User has been successfully created!" });
       signUpForm.clear();
-      //router.push('/auth/login');
+      router.push('/auth/login');
     } catch (err: any) {
       toastAlertRef.value.open({ status: "error", message: err.message });
     } finally {
