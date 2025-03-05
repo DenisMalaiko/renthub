@@ -37,3 +37,21 @@ export const CREATE_USER = gql`
     }
   }
 `
+
+export const UPDATE_USER = gql`
+  mutation user ($userUpdateInput: UserUpdateInput!) { 
+    updateUser(userUpdateInput: $userUpdateInput) {
+      _id
+      name
+      login
+      email
+      city {
+        cityId
+        cityName
+        countryId
+        countryName
+        fullAddress
+      }
+    }
+  }
+`

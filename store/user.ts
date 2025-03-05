@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { UserProfile } from "~/models/user/UserProfile";
-import { createUser, login } from "~/composables/UsersRequests";
+import { createUser, updateUser, login } from "~/composables/UsersRequests";
 import { watch } from "vue";
 
 export const UserModule = defineStore('userModule', {
@@ -10,12 +10,6 @@ export const UserModule = defineStore('userModule', {
   actions: {
     setUser(user: UserProfile) {
       this.user = user;
-    },
-    updateUser(user: UserProfile) {
-      this.user = {
-        ...this.user,
-        ...user
-      }
     },
     async login(form: any) {
       const { result } = await login(form.email, form.password);
@@ -37,15 +31,13 @@ export const UserModule = defineStore('userModule', {
     async createUser(form: any) {
       const { mutate } = await createUser();
 
-      console.log("FORM ", form)
-
       return await mutate({
         userInput: {
           name: form?.name,
           login: form?.login,
           email: form?.email,
           city: {
-            cityId: form?.city.cityId,
+            cityId: form.city.cityId,
             cityName: form.city.cityName,
             countryId: form.city.countryId,
             countryName: form.city.countryName,
@@ -55,6 +47,32 @@ export const UserModule = defineStore('userModule', {
         }
       }).then(() => {
         console.log("SUCCESS CREATED")
+      })
+    },
+    async updateUser(form: any) {
+      const { mutate } = await updateUser();
+
+      return await mutate({
+        userUpdateInput: {
+          _id: form?._id,
+          name: form?.name,
+          login: form?.login,
+          email: form?.email,
+          city: {
+            cityId: form.city?.cityId,
+            cityName: form.city?.cityName,
+            countryId: form?.city?.countryId,
+            countryName: form?.city?.countryName,
+            fullAddress: form?.city?.fullAddress
+          }
+        }
+      }).then((response) => {
+        console.log("SUCCESS UPDATED ", response);
+
+        this.user = {
+          ...this.user,
+          ...response?.data?.updateUser
+        }
       })
     },
     logoutUser() {
