@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { UserProfile } from "~/models/user/UserProfile";
 import { createUser, updateUser, login } from "~/composables/UsersRequests";
 import { watch } from "vue";
+import { useApolloClient } from "@vue/apollo-composable";
+import { ApolloLink, HttpLink } from "@apollo/client/core";
 
 export const UserModule = defineStore('userModule', {
   state: () => ({
@@ -20,6 +22,7 @@ export const UserModule = defineStore('userModule', {
           (newValue) => {
             if (newValue) {
               this.setUser(newValue.login);
+              this.updateAuthLink(newValue.login.token);
               stop();
               resolve(newValue);
             }
@@ -77,6 +80,20 @@ export const UserModule = defineStore('userModule', {
     },
     logoutUser() {
       this.user = {}
-    }
+    },
+    updateAuthLink(token: string) {
+      const apolloClient = useApolloClient().client;
+
+      const authLink = new ApolloLink((operation, forward) => {
+        operation.setContext({
+          headers: {
+            Authorization: token ? `Bearer ${token}` : '',
+          },
+        });
+        return forward(operation);
+      });
+
+      apolloClient.setLink(authLink.concat(new HttpLink({ uri: 'http://localhost:8080/graphql' })));
+    },
   },
 });
