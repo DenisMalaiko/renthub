@@ -1,9 +1,24 @@
 import { provideApolloClient } from "@vue/apollo-composable";
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
+import { ApolloClient, InMemoryCache, HttpLink, ApolloLink} from "@apollo/client/core";
+import { UserModule } from "~/store/user";
 
 export default defineNuxtPlugin(() => {
+
+  let authLink = new ApolloLink((operation, forward) => {
+    const userModule = UserModule();
+    const token = userModule.user.token;
+    operation.setContext({
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+    });
+    return forward(operation);
+  });
+
+  const httpLink = new HttpLink({ uri: "http://localhost:8080/graphql" });
+
   const apolloClient = new ApolloClient({
-    link: new HttpLink({ uri: "http://localhost:8080/graphql" }),
+    link: authLink.concat(httpLink), // комбінуємо authLink та httpLink
     cache: new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
@@ -17,6 +32,26 @@ export default defineNuxtPlugin(() => {
       },
     },
   });
+
+  const updateAuthLink = (newToken: string) => {
+    authLink = new ApolloLink((operation, forward) => {
+      operation.setContext({
+        headers: {
+          Authorization: newToken ? `Bearer ${newToken}` : "",
+        },
+      });
+      return forward(operation);
+    });
+
+    apolloClient.setLink(authLink.concat(httpLink));
+  };
+
+
+  const userModule = UserModule();
+  const storedToken = userModule.user.token;
+  if (storedToken) {
+    updateAuthLink(storedToken);
+  }
 
   provideApolloClient(apolloClient);
 })
