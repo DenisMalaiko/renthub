@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { Product } from "~/models/Product";
-import { addProduct, getProducts, getProductsByUser } from "~/composables/ProductsRequests";
+import { addProduct, getProducts, getProductsByUser, uploadPhoto } from "~/composables/ProductsRequests";
 import { watchEffect } from "vue";
 import { UserModule } from "~/store/user";
 
@@ -11,20 +11,25 @@ export const ProductModule = defineStore('productModule', {
   }),
   actions: {
     async addProduct(product: Product | null) {
-/*      console.log("START UPLOAD PRODUCT")
-      console.log(product?.photo)
+      if (!product) {
+        console.error("Продукт не переданий");
+        return;
+      }
 
-      const { mutate } = await uploadPhoto()
+      console.log("-------");
+      console.log("START UPLOAD PRODUCT");
+      console.log(product.photo);
+      console.log("FORMAT: ", product.photo instanceof File);
+      console.log("-------");
 
-      await mutate({
-        file: product?.photo
-      }).then(() => {
-        console.log("SUCCESS UPLOAD TO SERVER")
-      })*/
+      if (product.photo instanceof File) {
+        const uploadedPhoto = await uploadPhoto(product.photo);
+        console.log("Uploaded Photo ", uploadedPhoto)
+      }
 
 
 
-      const { mutate } = await addProduct();
+      /*const { mutate } = await addProduct();
 
       await mutate({
         productInput: {
@@ -35,7 +40,7 @@ export const ProductModule = defineStore('productModule', {
         },
       }).then((response) => {
         this.getProductsByUser();
-      })
+      })*/
     },
     async getProducts() {
       const { result } = await getProducts();
