@@ -1,21 +1,33 @@
 import { provideApolloClient } from "@vue/apollo-composable";
-import { ApolloClient, InMemoryCache, HttpLink, ApolloLink} from "@apollo/client/core";
+import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client/core";
 import { UserModule } from "~/store/user";
+import { createHttpLink } from "@apollo/client/link/http";
+
 
 export default defineNuxtPlugin(() => {
+
+  const httpLink = createHttpLink({
+    uri: "http://localhost:8080/graphql",
+    credentials: "include",
+    headers: {
+      "Apollo-Require-Preflight": "true",
+    },
+  });
+
 
   let authLink = new ApolloLink((operation, forward) => {
     const userModule = UserModule();
     const token = userModule.user.token;
+
     operation.setContext({
       headers: {
         Authorization: token ? `Bearer ${token}` : "",
+        "Apollo-Require-Preflight": true,
       },
     });
+
     return forward(operation);
   });
-
-  const httpLink = new HttpLink({ uri: "http://localhost:8080/graphql" });
 
   const apolloClient = new ApolloClient({
     link: authLink.concat(httpLink), // комбінуємо authLink та httpLink
@@ -38,6 +50,7 @@ export default defineNuxtPlugin(() => {
       operation.setContext({
         headers: {
           Authorization: newToken ? `Bearer ${newToken}` : "",
+          "Apollo-Require-Preflight": true,
         },
       });
       return forward(operation);

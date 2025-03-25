@@ -21,10 +21,11 @@ export const CREATE_PRODUCT = gql`
 `;
 
 export const UPLOAD_PHOTO = gql`
-  mutation($file: Upload!) {
-    uploadPhoto(file: $file) {
+  mutation UploadPhoto($photo: Upload!) {
+    uploadPhoto(photo: $photo) {
       id
       filename
+      url
     }
   }
 `;
