@@ -7,7 +7,7 @@
         <v-row>
           <v-col v-for="product in products" cols="3">
             <v-card>
-              <img src="" alt="no image">
+              <v-img :src="product.photo" cover height="250px" alt="no image"></v-img>
               <v-card-text>
                 <p>{{product.name}}</p>
                 <b>{{product.price}} $</b>
