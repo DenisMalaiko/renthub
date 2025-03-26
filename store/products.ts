@@ -10,37 +10,21 @@ export const ProductModule = defineStore('productModule', {
     productsUser: []
   }),
   actions: {
-    async addProduct(product: Product | null) {
-      if (!product) {
-        console.error("Продукт не переданий");
-        return;
-      }
-
-      console.log("-------");
-      console.log("START UPLOAD PRODUCT");
-      console.log(product.photo);
-      console.log("FORMAT: ", product.photo instanceof File);
-      console.log("-------");
-
-      if (product.photo instanceof File) {
-        const uploadedPhoto = await uploadPhoto(product.photo);
-        console.log("Uploaded Photo ", uploadedPhoto)
-      }
-
-
-
-      /*const { mutate } = await addProduct();
+    async addProduct(product: Product | any) {
+      const uploadedPhoto = await uploadPhoto(product.photo);
+      const { mutate } = await addProduct();
 
       await mutate({
         productInput: {
           name: product?.name,
           price: product?.price,
+          photo: `http://localhost:8080${uploadedPhoto.url}`,
           user: product?.user,
           categories: product?.categories || [],
         },
       }).then((response) => {
         this.getProductsByUser();
-      })*/
+      })
     },
     async getProducts() {
       const { result } = await getProducts();

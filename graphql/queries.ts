@@ -6,6 +6,7 @@ export const GET_PRODUCTS_BY_USER = gql`
       _id
       name
       price
+      photo
       user {
         _id
         name
@@ -26,6 +27,7 @@ export const GET_PRODUCTS = gql`
       _id
       name
       price
+      photo
       user {
         _id
         name

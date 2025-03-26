@@ -42,8 +42,6 @@
             placeholder="Pick an avatar"
             prepend-icon="mdi-camera"
           ></v-file-input>
-
-          <pre>{{addProductForm}}</pre>
         </v-card-text>
 
         <v-card-actions class="justify-end px-3 pt-0 pb-3">
