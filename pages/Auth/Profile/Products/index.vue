@@ -8,13 +8,9 @@
 
     <v-row>
       <v-col v-for="product in productsUser" cols="3">
-        <v-card>
-          <v-img :src="product.photo" cover height="250px" alt="no image"></v-img>
-          <v-card-text>
-            <p>{{product.name}}</p>
-            <b>{{product.price}} $</b>
-          </v-card-text>
-        </v-card>
+        <ProductCard
+          :product="product"
+        />
       </v-col>
     </v-row>
 
@@ -26,6 +22,7 @@
 import {definePageMeta} from "~/.nuxt/imports";
 import {useProductsLogic} from "~/pages/Auth/Profile/Products/products";
 import ProductDlg from "~/components/ProductDlg/ProductDlg.vue";
+import ProductCard from "~/components/ProductCard/ProductCard.vue";
 
 definePageMeta({
   layout: "profile"

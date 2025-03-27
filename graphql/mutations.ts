@@ -21,6 +21,15 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
+export const DELETE_PRODUCT = gql`
+  mutation product($productId: String!) {
+    deleteProduct(productId: $productId) {
+      status
+      message
+    }
+  }
+`
+
 export const UPLOAD_PHOTO = gql`
   mutation UploadPhoto($photo: Upload!) {
     uploadPhoto(photo: $photo) {

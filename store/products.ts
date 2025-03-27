@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { Product } from "~/models/Product";
-import { addProduct, getProducts, getProductsByUser, uploadPhoto } from "~/composables/ProductsRequests";
+import { addProduct, getProducts, getProductsByUser, uploadPhoto, deleteProduct } from "~/composables/ProductsRequests";
 import { watchEffect } from "vue";
 import { UserModule } from "~/store/user";
 
@@ -23,6 +23,16 @@ export const ProductModule = defineStore('productModule', {
           categories: product?.categories || [],
         },
       }).then((response) => {
+        this.getProductsByUser();
+      })
+    },
+    async deleteProduct(productId: string) {
+      const { mutate } = await deleteProduct();
+
+      await mutate({
+        productId: productId
+      }).then(() => {
+        console.log("SUCCESS")
         this.getProductsByUser();
       })
     },
