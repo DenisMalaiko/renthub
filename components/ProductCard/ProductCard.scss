@@ -1,0 +1,9 @@
+.product-card {
+  position: relative;
+
+  .v-card-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
