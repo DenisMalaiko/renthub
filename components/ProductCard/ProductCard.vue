@@ -6,7 +6,7 @@
       <b>{{product.price}} $</b>
     </v-card-text>
 
-    <v-card-actions v-if="isAuth">
+    <v-card-actions v-if="isAuth && isProfile">
       <v-btn
         @click="deleteProduct(product._id)"
         color="red"
@@ -24,6 +24,10 @@ defineProps({
   product: {
     type: Product,
     required: false
+  },
+  isProfile: {
+    type: Boolean,
+    required: true
   }
 })
 

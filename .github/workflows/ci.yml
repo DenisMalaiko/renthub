@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - name: Checkout репозиторію
+        uses: actions/checkout@v4
+
+      - name: Встановлення Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Встановлення залежностей
+        run: npm install
+
+      - name: Запуск білда
+        run: npm run build
+
+      - name: Запуск тестів
+        run: npm run test:e2e
+
+      - name: Запуск лінтерів
+        run: npm run eslint

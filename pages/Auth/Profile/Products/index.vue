@@ -10,6 +10,7 @@
       <v-col v-for="product in productsUser" cols="3">
         <ProductCard
           :product="product"
+          :isProfile="true"
         />
       </v-col>
     </v-row>

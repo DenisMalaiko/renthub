@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test:e2e": "node ./scripts/e2e.test.js",
+    "eslint": "node ./scripts/eslint.js"
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",

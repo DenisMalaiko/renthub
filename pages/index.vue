@@ -8,6 +8,7 @@
           <v-col v-for="product in products" cols="3">
             <ProductCard
               :product="product"
+              :isProfile="false"
             />
           </v-col>
         </v-row>
