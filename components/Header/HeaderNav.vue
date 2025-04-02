@@ -43,4 +43,4 @@ import { useHeaderLogic } from "./HeaderNav.ts";
 const { logo, user, logout } = useHeaderLogic();
 </script>
 
-<style src="./HeaderNav.scss" lang="scss" scoped></style>
+<style src="./HeaderNav.scss" lang="scss"></style>
