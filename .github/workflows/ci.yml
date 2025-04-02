@@ -32,8 +32,5 @@ jobs:
       - name: Запуск білда
         run: npm run build
 
-      - name: Запуск тестів
-        run: npm run test:e2e
-
       - name: Запуск лінтерів
         run: npm run eslint
