@@ -18,7 +18,8 @@
     "types": [
       "@types/node",
       "@nuxt/vue-app",
-      "@nuxtjs/vuetify"
+      "@nuxtjs/vuetify",
+      "vitest"
     ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]

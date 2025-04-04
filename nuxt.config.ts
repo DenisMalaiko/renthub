@@ -126,5 +126,10 @@ export default defineNuxtConfig({
     '@/assets/css/styles.css'
   ],
 
+  test: {
+    globals: true,
+    environment: 'jsdom'
+  },
+
   compatibilityDate: '2025-02-25',
 })
