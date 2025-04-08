@@ -13,7 +13,8 @@ export default defineNuxtConfig({
   modules: [
     "vuetify-nuxt-module",
     "@pinia/nuxt",
-    "@vite-pwa/nuxt"
+    "@vite-pwa/nuxt",
+    '@nuxt/test-utils/module'
   ],
 
   // Вимикає SSR (важливо для PWA)
@@ -125,11 +126,6 @@ export default defineNuxtConfig({
     // Global SCSS file
     '@/assets/css/styles.css'
   ],
-
-  test: {
-    globals: true,
-    environment: 'jsdom'
-  },
 
   compatibilityDate: '2025-02-25',
 })
