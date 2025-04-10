@@ -114,7 +114,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['vue'],
+    transpile: ['vuetify'],
     loaders: {
       scss: {
         implementation: require('sass')
