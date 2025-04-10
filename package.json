@@ -40,7 +40,6 @@
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^17.4.4",
     "jsdom": "^26.0.0",
-    "nuxt-vitest": "^0.11.5",
     "playwright-core": "^1.51.1",
     "sass": "^1.77.6",
     "sass-loader": "^14.2.1",
