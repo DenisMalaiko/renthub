@@ -3,6 +3,7 @@ import { config } from '@vue/test-utils'
 config.global.stubs = {
   'v-container': { template: '<div><slot /></div>'},
   'v-row': { template: '<div><slot /></div>'},
+  'v-form': { template: '<div><slot /></div>'},
   'v-col': { template: '<div><slot /></div>'},
   'v-card': { template: '<div><slot /></div>'},
   'v-img': { template: '<div><slot /></div>'},
@@ -14,6 +15,7 @@ config.global.stubs = {
   'v-menu': { template: '<div><slot /></div>'},
   'v-text-field': { template: '<div><slot /></div>'},
   'v-date-picker': { template: '<div><slot /></div>'},
+  'v-snackbar': { template: '<div><slot /></div>'},
 
   NuxtLink: {
     props: ['to'],
