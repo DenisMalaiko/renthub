@@ -6,8 +6,9 @@
 
           <h1 class="text-left mb-3">Sign In</h1>
 
-          <v-form ref="signInFormRef" @submit.prevent="login()">
+          <v-form ref="signInFormRef" @submit.prevent="login()" data-testid="login-form">
             <v-text-field
+              data-testid="email-input"
               v-model="signInForm.email"
               :rules="rules.email"
               label="Email"
@@ -15,6 +16,7 @@
             ></v-text-field>
 
             <v-text-field
+              data-testid="password-input"
               v-model="signInForm.password"
               :rules="rules.password"
               :append-icon="password.isShowRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"

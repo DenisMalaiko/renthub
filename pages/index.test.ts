@@ -12,7 +12,7 @@ vi.mock('~/pages/home', () => ({
   })
 }));
 
-describe("index.vue", () => {
+describe("Home", () => {
   const mountComponent = () => mount(IndexPage);
 
   it('Render Home', () => {
