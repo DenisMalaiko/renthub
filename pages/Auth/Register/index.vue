@@ -6,13 +6,14 @@
 
           <h1 class="text-left mb-3">Sign Up</h1>
 
-          <v-form ref="signUpFormRef" @submit.prevent="createUser()">
+          <v-form ref="signUpFormRef" @submit.prevent="createUser()" data-testid="register-form">
 
             <v-text-field
               v-model="signUpForm.name"
               :rules="rules.name"
               label="Name"
               class="mb-2"
+              data-testid="name-input"
             ></v-text-field>
 
             <v-text-field
@@ -20,6 +21,7 @@
               :rules="rules.login"
               label="Login"
               class="mb-2"
+              data-testid="login-input"
             ></v-text-field>
 
             <v-text-field
@@ -27,6 +29,7 @@
               :rules="rules.email"
               label="Email"
               class="mb-2"
+              data-testid="email-input"
             ></v-text-field>
 
             <v-combobox
@@ -38,6 +41,7 @@
               label="City"
               :loading="loadingCity"
               class="mb-2"
+              data-testid="address-input"
             />
 
             <div class="label-password mb-4">
@@ -49,6 +53,7 @@
                 @click:append="password.isShowPassword = !password.isShowPassword"
                 label="Password"
                 validate-on-blur
+                data-testid="password-input"
               ></v-text-field>
 
               <v-progress-linear
@@ -66,6 +71,7 @@
               label="Repeat password"
               validate-on-blur
               class="mb-2"
+              data-testid="repeat-password-input"
             ></v-text-field>
 
             <div class="d-flex align-center">
