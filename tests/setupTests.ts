@@ -16,6 +16,7 @@ config.global.stubs = {
   'v-text-field': { template: '<div><slot /></div>'},
   'v-date-picker': { template: '<div><slot /></div>'},
   'v-snackbar': { template: '<div><slot /></div>'},
+  'v-progress-linear': { template: '<div><slot /></div>'},
 
   NuxtLink: {
     props: ['to'],
