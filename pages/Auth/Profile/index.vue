@@ -2,21 +2,21 @@
   <section class="profile-section">
     <ul class="profile-section-list">
       <li>
-        <b>Name: </b> {{ user.name }}
+        <b>Name: </b> {{ user?.name }}
       </li>
       <li>
-        <b>Login: </b> {{ user.login }}
+        <b>Login: </b> {{ user?.login }}
       </li>
       <li>
-        <b>Email: </b> {{ user.email }}
+        <b>Email: </b> {{ user?.email }}
       </li>
       <li>
-        <b>City: </b> {{ user.city?.fullAddress }}
+        <b>City: </b> {{ user?.city?.fullAddress }}
       </li>
     </ul>
 
     <div class="profile-section-actions">
-      <v-btn @click="editProfile()" color="primary">
+      <v-btn @click="editProfile()" data-testid="edit-button" color="primary">
         Edit
       </v-btn>
     </div>

@@ -16,18 +16,18 @@ vi.mock('./HeaderNav', () => ({
 describe('HeaderNav.vue', () => {
   const mountComponent = () => shallowMount(HeaderNav)
 
-  it('renders logo text', () => {
+  it('Render Logo', () => {
     const wrapper = mountComponent()
     expect(wrapper.text()).toContain('RentHub')
   })
 
-  it('shows user name when logged in', () => {
+  it('Check User Name', () => {
     const wrapper = mountComponent()
     expect(wrapper.text()).toContain('John Doe')
     expect(wrapper.text()).toContain('Logout')
   })
 
-  it('calls logout method when logout is clicked', async () => {
+  it('Logout', async () => {
     const wrapper = mountComponent()
     const logoutBtn = wrapper.findAll('.link').find(el => el.text().includes('Logout'))
     expect(logoutBtn).toBeTruthy()

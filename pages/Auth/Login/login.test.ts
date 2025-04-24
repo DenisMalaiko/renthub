@@ -1,7 +1,6 @@
 import {describe, expect, it, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import Login from "~/pages/Auth/Login/index.vue";
-import { createPinia, setActivePinia } from 'pinia';
 import { UserModule } from "~/store/user";
 
 describe("Login", () => {
@@ -21,7 +20,6 @@ describe("Login", () => {
   });
 
   it('Success Login', async () => {
-    setActivePinia(createPinia());
     const store = UserModule();
     store.login = vi.fn().mockResolvedValue({
       login: {
@@ -42,7 +40,6 @@ describe("Login", () => {
   });
 
   it('Failed Login', async () => {
-    setActivePinia(createPinia());
     const store = UserModule();
     store.login = vi.fn().mockRejectedValue(new Error('Invalid credentials'))
 
