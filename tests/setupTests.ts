@@ -6,9 +6,10 @@ config.global.stubs = {
   'v-form': { template: '<div><slot /></div>'},
   'v-col': { template: '<div><slot /></div>'},
   'v-card': { template: '<div><slot /></div>'},
-  'v-img': { template: '<div><slot /></div>'},
+  'v-card-title': { template: '<div><slot /></div>'},
   'v-card-text': { template: '<div><slot /></div>'},
   'v-card-actions': { template: '<div><slot /></div>'},
+  'v-img': { template: '<div><slot /></div>'},
   'v-btn': { template: '<div><slot /></div>'},
   'v-spacer': { template: '<div><slot /></div>'},
   'v-combobox': { template: '<div><slot /></div>'},
@@ -17,6 +18,7 @@ config.global.stubs = {
   'v-date-picker': { template: '<div><slot /></div>'},
   'v-snackbar': { template: '<div><slot /></div>'},
   'v-progress-linear': { template: '<div><slot /></div>'},
+  'v-dialog': { template: '<div><slot /></div>'},
 
   NuxtLink: {
     props: ['to'],

@@ -9,7 +9,7 @@ export function useProfileDlgLogic() {
   const toastAlertRef = ref();
   const editProfileFormRef = ref();
   const user = UserModule();
-  let editProfileForm = ref<UserProfile | null>(null);
+  let editProfileForm = ref<UserProfile>(new UserProfile());
 
   const rules = computed(() => {
     return {
