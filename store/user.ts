@@ -5,8 +5,12 @@ import { watch } from "vue";
 import { useApolloClient } from "@vue/apollo-composable";
 import { ApolloLink, HttpLink } from "@apollo/client/core";
 
+interface UserState {
+  user: UserProfile
+}
+
 export const UserModule = defineStore('userModule', {
-  state: () => ({
+  state: (): UserState => ({
     user: JSON.parse(JSON.stringify(new UserProfile())),
   }),
   actions: {
@@ -79,7 +83,7 @@ export const UserModule = defineStore('userModule', {
       })
     },
     logoutUser() {
-      this.user = {}
+      this.user = JSON.parse(JSON.stringify(new UserProfile()))
     },
     updateAuthLink(token: string) {
       const apolloClient = useApolloClient().client;
