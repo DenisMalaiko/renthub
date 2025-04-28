@@ -13,7 +13,7 @@ export function useProductLogic() {
   const loading = ref(false);
   const addProductFormRef = ref();
   const searchCategoryQuery = ref("");
-  let addProductForm = ref<Product | null>(null);
+  let addProductForm = ref<Product>(new Product(userModule.user._id));
 
   const rules = computed(() => {
     return {

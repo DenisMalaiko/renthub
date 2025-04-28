@@ -19,6 +19,8 @@ config.global.stubs = {
   'v-snackbar': { template: '<div><slot /></div>'},
   'v-progress-linear': { template: '<div><slot /></div>'},
   'v-dialog': { template: '<div><slot /></div>'},
+  'v-select': { template: '<div><slot /></div>'},
+  'v-file-input': { template: '<div><slot /></div>'},
 
   NuxtLink: {
     props: ['to'],
