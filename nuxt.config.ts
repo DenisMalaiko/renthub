@@ -13,12 +13,12 @@ export default defineNuxtConfig({
   modules: [
     "vuetify-nuxt-module",
     "@pinia/nuxt",
-    "@vite-pwa/nuxt",
+    //"@vite-pwa/nuxt",
     '@nuxt/test-utils/module'
   ],
 
   // Вимикає SSR (важливо для PWA)
-  ssr: false,
+  ssr: true,
 
   vite: {
     optimizeDeps: {
