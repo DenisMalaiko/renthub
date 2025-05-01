@@ -1,16 +1,11 @@
 import {ProductModule} from "~/store/products";
-import {computed, onMounted} from "vue";
+import {useAsyncData} from "nuxt/app";
+import {computed} from "vue";
 
 export function useHomeLogic() {
   const productModule = ProductModule();
-
-  const products = computed(() => {
-    return productModule.products;;
-  })
-
-  onMounted(async () => {
-    await productModule.getProducts();
-  });
+  const products = computed(() => productModule.products);
+  useAsyncData('products', () => productModule.getProducts())
 
   return {
     products
