@@ -38,8 +38,8 @@
             v-model="addProductForm.photo"
             :rules="rules.photo"
             accept="image/*"
-            label="Avatar"
-            placeholder="Pick an avatar"
+            label="Photo"
+            placeholder="Pick a photo"
             prepend-icon="mdi-camera"
           ></v-file-input>
         </v-card-text>

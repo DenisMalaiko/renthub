@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import { GET_PRODUCTS, GET_PRODUCTS_BY_USER, GET_CATEGORIES } from "~/graphql/queries";
 import {CREATE_PRODUCT, DELETE_PRODUCT, UPLOAD_PHOTO} from "~/graphql/mutations";
+import {useRuntimeConfig} from "nuxt/app";
 
 export const getProducts = async () => {
   return useQuery(GET_PRODUCTS);
@@ -25,6 +26,7 @@ export const getCategories = async () => {
 }
 
 export const uploadPhoto = async (file: File) => {
+  const config = useRuntimeConfig()
   const formData = new FormData();
   formData.append("operations", JSON.stringify({
     query: `
@@ -43,7 +45,7 @@ export const uploadPhoto = async (file: File) => {
   formData.append("0", file, file.name);
 
   try {
-    const response = await fetch("http://localhost:8080/graphql", {
+    const response = await fetch(`${config.public.API_URL}/graphql`, {
       method: "POST",
       body: formData,
       credentials: "include",

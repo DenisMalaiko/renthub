@@ -1,7 +1,9 @@
 import {Product} from "~/models/Product";
+import {useRuntimeConfig} from "nuxt/app";
 
 export const checkCachedProducts = async (requestBody: Object): Promise<Product[] | []> => {
-  const cacheKey = new Request("http://localhost:8080/graphql" + encodeURIComponent(JSON.stringify(requestBody)), {
+  const config = useRuntimeConfig()
+  const cacheKey = new Request(`${config.public.API_URL}/graphql` + encodeURIComponent(JSON.stringify(requestBody)), {
     headers: {},
   });
 

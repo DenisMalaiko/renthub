@@ -20,10 +20,10 @@ describe("Home", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it('Render Search', () => {
+/*  it('Render Search', () => {
     const wrapper = mountComponent();
     expect(wrapper.findComponent({ name: 'SearchNav' }).exists()).toBe(true)
-  });
+  });*/
 
   it('Render Products', () => {
     const wrapper = mountComponent();

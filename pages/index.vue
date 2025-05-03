@@ -1,6 +1,6 @@
 <template>
   <section class="section home">
-    <SearchNav />
+<!--    <SearchNav />-->
 
     <section>
       <v-container>
@@ -22,5 +22,5 @@ import SearchNav from "~/components/Search/SearchNav.vue";
 import ProductCard from "~/components/ProductCard/ProductCard.vue";
 import {useHomeLogic} from "~/pages/home";
 
-const { products } = useHomeLogic();
+const { products, config } = useHomeLogic();
 </script>

@@ -4,6 +4,7 @@ import { createUser, updateUser, login } from "~/composables/UsersRequests";
 import { watch } from "vue";
 import { useApolloClient } from "@vue/apollo-composable";
 import { ApolloLink, HttpLink } from "@apollo/client/core";
+import {useRuntimeConfig} from "nuxt/app";
 
 interface UserState {
   user: UserProfile
@@ -87,6 +88,7 @@ export const UserModule = defineStore('userModule', {
     },
     updateAuthLink(token: string) {
       const apolloClient = useApolloClient().client;
+      const config = useRuntimeConfig()
 
       const authLink = new ApolloLink((operation, forward) => {
         operation.setContext({
@@ -97,7 +99,7 @@ export const UserModule = defineStore('userModule', {
         return forward(operation);
       });
 
-      apolloClient.setLink(authLink.concat(new HttpLink({ uri: 'http://localhost:8080/graphql' })));
+      apolloClient.setLink(authLink.concat(new HttpLink({ uri: `${config.public.API_URL}/graphql` })));
     },
   },
 });
