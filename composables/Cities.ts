@@ -1,12 +1,15 @@
 import { ref, watch } from "vue";
+import {useRuntimeConfig} from "nuxt/app";
 
 export default function CitiesMixin() {
+  const config = useRuntimeConfig();
   const cities = ref([]);
   const searchCityQuery = ref('');
   const loadingCity = ref(false)
 
   async function searchPlaces(city: string) {
-    const url = `http://localhost:8080/searchCity?city=${city}`;
+    const url = `${config.public.API_URL}/searchCity?city=${city}`;
+
     try {
       loadingCity.value = true;
       const response = await fetch(url);

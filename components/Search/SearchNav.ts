@@ -1,6 +1,8 @@
 import { ref, watch, reactive } from 'vue';
+import {useRuntimeConfig} from "nuxt/app";
 
 export function setupSearchComponent() {
+  const config = useRuntimeConfig();
   const loading = reactive({
     city: false,
     product: false
@@ -20,7 +22,7 @@ export function setupSearchComponent() {
   let cities: any = ref([]);
 
   async function searchPlaces(city: string) {
-    const url = `http://localhost:8080/searchCity?city=${encodeURIComponent(city)}`;
+    const url = `${config.public.API_URL}/searchCity?city=${encodeURIComponent(city)}`;
 
     try {
       loading.city = true;

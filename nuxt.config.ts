@@ -8,6 +8,12 @@ export default defineNuxtConfig({
     preset: 'node-server', // Або 'static' для повністю статичного білду
   },
 
+  runtimeConfig: {
+    public: {
+      API_URL: 'https://renthub-api.onrender.com',
+    }
+  },
+
   devtools: { enabled: false },
 
   modules: [

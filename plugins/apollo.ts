@@ -2,12 +2,13 @@ import { provideApolloClient } from "@vue/apollo-composable";
 import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client/core";
 import { UserModule } from "~/store/user";
 import { createHttpLink } from "@apollo/client/link/http";
+import {useRuntimeConfig} from "nuxt/app";
 
 
 export default defineNuxtPlugin(() => {
-
+  const config = useRuntimeConfig()
   const httpLink = createHttpLink({
-    uri: "http://localhost:8080/graphql",
+    uri: `${config.public.API_URL}/graphql`,
     credentials: "include",
     headers: {
       "Apollo-Require-Preflight": "true",

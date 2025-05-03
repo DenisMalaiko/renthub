@@ -3,6 +3,7 @@ import { Product } from "~/models/Product";
 import { addProduct, getProducts, getProductsByUser, uploadPhoto, deleteProduct } from "~/composables/ProductsRequests";
 import { watchEffect } from "vue";
 import { UserModule } from "~/store/user";
+import {useRuntimeConfig} from "nuxt/app";
 
 export const ProductModule = defineStore('productModule', {
   state: () => ({
@@ -11,6 +12,7 @@ export const ProductModule = defineStore('productModule', {
   }),
   actions: {
     async addProduct(product: Product | any) {
+      const config = useRuntimeConfig()
       const uploadedPhoto = await uploadPhoto(product.photo);
       const { mutate } = await addProduct();
 
@@ -18,7 +20,7 @@ export const ProductModule = defineStore('productModule', {
         productInput: {
           name: product?.name,
           price: product?.price,
-          photo: `http://localhost:8080${uploadedPhoto.url}`,
+          photo: `${config.public.API_URL}${uploadedPhoto.url}`,
           user: product?.user,
           categories: product?.categories || [],
         },

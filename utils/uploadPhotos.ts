@@ -1,4 +1,7 @@
+import {useRuntimeConfig} from "nuxt/app";
+
 export const uploadPhoto = async (file: any) => {
+  const config = useRuntimeConfig();
   const formData = new FormData();
   formData.append("operations", JSON.stringify({
     query: `mutation ($file: Upload!) {
@@ -19,7 +22,7 @@ export const uploadPhoto = async (file: any) => {
   console.log("--------")
 
   try {
-    const response = await fetch('http://localhost:8080/graphql', {
+    const response = await fetch(`${config.public.API_URL}/graphql`, {
       method: "POST",
       body: formData,
       headers: {
