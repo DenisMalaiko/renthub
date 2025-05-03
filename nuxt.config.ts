@@ -24,7 +24,8 @@ export default defineNuxtConfig({
   ],
 
   // Вимикає SSR (важливо для PWA)
-  ssr: true,
+  ssr: false,
+  target: 'static',
 
   vite: {
     optimizeDeps: {
