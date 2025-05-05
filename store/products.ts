@@ -1,13 +1,14 @@
 import { defineStore } from "pinia";
 import { Product } from "~/models/Product";
-import { addProduct, getProducts, getProductsByUser, uploadPhoto, deleteProduct } from "~/composables/ProductsRequests";
+import { addProduct, getProducts, getProductsByUser, getProductById, uploadPhoto, deleteProduct } from "~/composables/ProductsRequests";
 import { watchEffect } from "vue";
 import { UserModule } from "~/store/user";
-import {useRuntimeConfig} from "nuxt/app";
+import { useRuntimeConfig } from "nuxt/app";
 
 export const ProductModule = defineStore('productModule', {
   state: () => ({
     products: [],
+    product: [],
     productsUser: []
   }),
   actions: {
@@ -58,5 +59,14 @@ export const ProductModule = defineStore('productModule', {
         }
       });
     },
+    async getProductById(id: string) {
+      const { result } = await getProductById(id);
+
+      watchEffect(() => {
+        if (result.value) {
+          this.product = result.value?.product;
+        }
+      });
+    }
   }
 })

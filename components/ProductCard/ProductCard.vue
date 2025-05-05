@@ -1,6 +1,9 @@
 <template>
   <v-card class="product-card">
-    <v-img :src="product.photo" cover height="250px" alt="no image"></v-img>
+    <NuxtLink :to="`/products/${product._id}`">
+      <v-img :src="product.photo" cover height="250px" alt="no image"></v-img>
+    </NuxtLink>
+
     <v-card-text>
       <h3>{{product.name}}</h3>
       <b>{{product.price}} $</b>
@@ -23,7 +26,7 @@ import {Product} from "~/models/Product";
 defineProps({
   product: {
     type: Product,
-    required: false
+    required: true
   },
   isProfile: {
     type: Boolean,

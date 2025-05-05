@@ -21,6 +21,27 @@ export const GET_PRODUCTS_BY_USER = gql`
   }
 `;
 
+export const GET_PRODUCT_BY_ID = gql`
+    query product($productId: String!) {
+        product(productId: $productId) {
+            _id
+            name
+            price
+            photo
+            user {
+                _id
+                name
+                login
+                email
+            }
+            categories {
+                _id
+                name
+            }
+        }
+    }
+`
+
 export const GET_PRODUCTS = gql`
   query products {
     products {
