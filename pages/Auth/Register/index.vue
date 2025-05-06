@@ -74,6 +74,11 @@
               data-testid="repeat-password-input"
             ></v-text-field>
 
+            <v-radio-group v-model="signUpForm.role" inline>
+              <v-radio :value="UserTypes.User" color="primary" label="User"></v-radio>
+              <v-radio :value="UserTypes.Admin" color="primary" label="Admin"></v-radio>
+            </v-radio-group>
+
             <div class="d-flex align-center">
               <v-btn
                 type="submit"
@@ -122,6 +127,7 @@ const {
   rules,
   score,
   createUser,
-  toastAlertRef
+  toastAlertRef,
+  UserTypes
 } = useRegisterLogic();
 </script>

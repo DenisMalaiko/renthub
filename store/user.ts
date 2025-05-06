@@ -51,6 +51,7 @@ export const UserModule = defineStore('userModule', {
             countryName: form.city.countryName,
             fullAddress: form.city.fullAddress
           },
+          role: form?.role,
           password: form.password
         }
       }).then(() => {

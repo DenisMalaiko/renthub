@@ -21,6 +21,8 @@ config.global.stubs = {
   'v-dialog': { template: '<div><slot /></div>'},
   'v-select': { template: '<div><slot /></div>'},
   'v-file-input': { template: '<div><slot /></div>'},
+  'v-radio-group': { template: '<div><slot /></div>'},
+  'v-radio': { template: '<div><slot /></div>'},
 
   NuxtLink: {
     props: ['to'],

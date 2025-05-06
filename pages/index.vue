@@ -1,6 +1,7 @@
 <template>
   <section class="section home">
-<!--    <SearchNav />-->
+    <SearchNav />
+
     <Loader v-if="loading"/>
 
     <section v-else>

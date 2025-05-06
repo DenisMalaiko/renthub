@@ -8,7 +8,9 @@ export function useHomeLogic() {
 
   onMounted(async () => {
     await productModule.getProducts()
-    loading.value = false;
+      .then(() => {
+        loading.value = false;
+      })
   });
 
   return {
