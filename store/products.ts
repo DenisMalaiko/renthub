@@ -35,7 +35,6 @@ export const ProductModule = defineStore('productModule', {
       await mutate({
         productId: productId
       }).then(() => {
-        console.log("SUCCESS")
         this.getProductsByUser();
       })
     },

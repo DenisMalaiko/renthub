@@ -17,8 +17,7 @@ export function useProductLogic() {
   });
 
   function bookProduct() {
-    console.log("Book product ", bookDlgRef.value)
-    bookDlgRef.value.open();
+    bookDlgRef.value.open(product.value);
   }
 
   return {

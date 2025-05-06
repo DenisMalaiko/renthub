@@ -3,6 +3,7 @@ import { ValidationsRules } from "~/utils/validations-rules";
 import { useRouter } from "nuxt/app";
 import { UserRegister } from "~/models/user/UserRegister";
 import { UserModule } from "~/store/user";
+import { UserTypes } from "~/enum/UserTypes";
 
 export function useRegisterLogic() {
   const userModule = UserModule();
@@ -68,43 +69,16 @@ export function useRegisterLogic() {
     try {
       await userModule.createUser(formValue);
 
-      console.log("CREATED")
       toastAlertRef.value.open({ status: "success", message: "User has been successfully created!" });
+
       signUpForm.clear();
+
       router.push('/auth/login');
     } catch (err: any) {
       toastAlertRef.value.open({ status: "error", message: err.message });
     } finally {
       loading.creating = true;
     }
-
-
-
-
-  /*  const requestBody = {
-      query: `mutation user { createUser(userInput: { name: "${signUpForm.name}", login: "${signUpForm.login}", email: "${signUpForm.email}", city: { cityId: "${signUpForm.city.cityId}", cityName: "${signUpForm.city.cityName}", countryId: "${signUpForm.city.countryId}", countryName: "${signUpForm.city.countryName}", fullAddress: "${signUpForm.city.fullAddress}"}, password: "${signUpForm.password}" }) { _id email } }`
-    };
-
-    try {
-      const response = await fetch('http://localhost:8080/graphql', {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(responseData.errors ? responseData.errors.map((e: any) => e.message).join(', ') : 'Unknown error');
-      }
-
-      toastAlertRef.value.open({ status: "success", message: "User has been successfully created!" });
-      signUpForm.clear();
-      router.push('/auth/login')
-    } catch (err: any) {
-      toastAlertRef.value.open({ status: "error", message: err.message });
-    } finally {
-      loading.creating = true;
-    }*/
   }
 
   return {
@@ -115,6 +89,7 @@ export function useRegisterLogic() {
     rules,
     score,
     createUser,
-    toastAlertRef
+    toastAlertRef,
+    UserTypes
   };
 }
