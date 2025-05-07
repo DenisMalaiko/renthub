@@ -66,3 +66,26 @@ export const UPDATE_USER = gql`
     }
   }
 `
+
+export const BOOK_PRODUCT = gql`
+  mutation booking ($bookingInput: BookingInput!) {
+    bookProduct(bookingInput: $bookingInput) {
+      _id
+      startDate
+      endDate
+      createdAt
+      user {
+        _id
+        name
+        login
+        email 
+      }
+      product {
+        _id
+        name
+        price
+        photo
+      }
+    }
+  }
+`
