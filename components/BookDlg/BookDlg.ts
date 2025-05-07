@@ -21,6 +21,7 @@ export function BookDlgLogic() {
   async function bookProduct() {
     try {
       await bookingModule.bookProduct(bookingForm);
+      close();
     } catch (err: any) {
       console.error(err.message);
     }
