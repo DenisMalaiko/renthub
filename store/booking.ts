@@ -20,6 +20,8 @@ export const BookingModule = defineStore('bookingModule', {
         },
       }).then((response) => {
         console.log("SUCCESS BOOKED ", response)
+      }).catch((error) => {
+        throw error.graphQLErrors;
       })
     }
   }
