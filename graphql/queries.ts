@@ -91,3 +91,26 @@ export const LOGIN = gql`
     }
   }  
 `
+
+export const GET_BOOKINGS_BY_USER = gql`
+    query bookingsByUser($userId: String!){
+        bookingsByUser(userId: $userId) {
+            _id
+            startDate
+            endDate
+            createdAt
+            user {
+                _id
+                name
+                login
+                email
+            }
+            product {
+                _id
+                name
+                price
+                photo
+            }
+        }
+    }
+`;

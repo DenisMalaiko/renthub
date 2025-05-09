@@ -9,6 +9,7 @@
           <v-divider></v-divider>
           <v-list-item link to="/auth/profile/" title="Profile"></v-list-item>
           <v-list-item link to="/auth/profile/products" title="Products"></v-list-item>
+          <v-list-item link to="/auth/profile/bookings" title="Bookings"></v-list-item>
         </v-navigation-drawer>
 
         <v-main>
