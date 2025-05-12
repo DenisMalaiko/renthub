@@ -93,13 +93,19 @@ export const LOGIN = gql`
 `
 
 export const GET_BOOKINGS_BY_USER = gql`
-    query bookingsByUser($userId: String!){
-        bookingsByUser(userId: $userId) {
+    query bookingsByUser($renterId: String!){
+        bookingsByUser(renterId: $renterId) {
             _id
             startDate
             endDate
             createdAt
-            user {
+            owner {
+                _id
+                name
+                login
+                email
+            }
+            renter {
                 _id
                 name
                 login

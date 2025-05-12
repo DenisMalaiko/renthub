@@ -74,11 +74,17 @@ export const BOOK_PRODUCT = gql`
       startDate
       endDate
       createdAt
-      user {
+      owner {
         _id
         name
         login
         email 
+      }
+      renter {
+        _id
+        name
+        login
+        email
       }
       product {
         _id
@@ -86,6 +92,15 @@ export const BOOK_PRODUCT = gql`
         price
         photo
       }
+    }
+  }
+`
+
+export const DELETE_BOOKING = gql`
+  mutation booking($bookingId: String!) {
+    deleteBooking(bookingId: $bookingId) {
+      status
+      message
     }
   }
 `
