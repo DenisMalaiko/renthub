@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {Booking} from "~/models/Booking";
-import {bookProduct, getBookingsByUser} from "~/composables/BookingRequests";
+import {bookProduct, getBookingsByUser, deleteBooking} from "~/composables/BookingRequests";
 import {UserModule} from "~/store/user";
 import {getProductsByUser} from "~/composables/ProductsRequests";
 import {watchEffect} from "vue";
@@ -19,7 +19,8 @@ export const BookingModule = defineStore('bookingModule', {
           startDate: booking?.startDate,
           endDate: booking?.endDate,
           createdAt: booking?.createdAt,
-          user: booking?.userId,
+          owner: booking?.ownerId,
+          renter: booking?.renterId,
           product: booking.productId,
         },
       }).then((response) => {
@@ -29,10 +30,20 @@ export const BookingModule = defineStore('bookingModule', {
       })
     },
 
+    async deleteBooking(bookingId: string) {
+      console.log("DELETE BOOKING ", bookingId)
+      const { mutate } = await deleteBooking();
+
+      await mutate({
+        bookingId: bookingId
+      }).then(() => {
+        this.getBookingsByUser();
+      })
+    },
+
     async getBookingsByUser() {
       const userModule = UserModule();
       const userId = userModule.user._id;
-      console.log("START GET BOOKINGS BY USER ", userId)
       const { result } = await getBookingsByUser(userId);
 
       watchEffect(() => {

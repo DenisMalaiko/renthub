@@ -3,7 +3,7 @@ export class Auth {
   password: string;
 
   constructor() {
-    this.email = "malaiko.denis@gmail.com";
+    this.email = "test2@gmail.com";
     this.password = "Password88";
   }
 }

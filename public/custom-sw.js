@@ -11,7 +11,7 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-    console.log("FETCH ")
+  /*  console.log("FETCH ")*/
 /*    const { request } = event;
 
     if (request.method === "POST" && request.url.includes("/graphql")) {
