@@ -66,9 +66,3 @@ export const uploadPhoto = async (file: File) => {
   }
 };
 
-/*
-export const uploadPhoto = async () => {
-  return useMutation(UPLOAD_PHOTO, {
-    context: { hasUpload: true }
-  });
-}*/

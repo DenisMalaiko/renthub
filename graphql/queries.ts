@@ -120,3 +120,9 @@ export const GET_BOOKINGS_BY_USER = gql`
         }
     }
 `;
+
+export const ASK_LANG_CHAIN = gql`
+    query askLangChain($prompt: String!) {
+        askLangChain(prompt: $prompt)
+    }
+`

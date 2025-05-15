@@ -22,7 +22,7 @@
     }
     &-list {
       padding: 10px 15px;
-      min-height: 280px;
+      min-height: 260px;
       overflow-y: scroll;
       .message {
         padding: 5px 10px;
@@ -30,8 +30,10 @@
         margin: auto 0 5px auto;
         border-radius: 5px;
         width: 80%;
-        &.my {
+        &.AI {
           margin: auto auto 5px 0;
+          background: rgb(24, 103, 192);
+          color: white;
         }
       }
     }
