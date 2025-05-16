@@ -1,7 +1,7 @@
 <template>
   <v-card class="product-card">
     <NuxtLink :to="`/products/${product._id}`">
-      <v-img :src="product.photo" cover height="250px" alt="no image"></v-img>
+      <v-img :src="product.photo" contain height="250px" alt="no image"></v-img>
     </NuxtLink>
 
     <v-card-text>

@@ -24,7 +24,7 @@ export function BookDlgLogic() {
   function open(product: any): void {
     dialog.value = true;
     bookingForm.productId = product._id;
-    bookingForm.ownerId = product.user._id;
+    bookingForm.ownerId = product.owner._id;
     bookingForm.renterId = user.value._id;
   }
 

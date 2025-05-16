@@ -13,9 +13,9 @@ export const getProductById = async (productId: string) => {
   });
 }
 
-export const getProductsByUser = async (userId: string) => {
+export const getProductsByUser = async (ownerId: string) => {
   return useQuery(GET_PRODUCTS_BY_USER, {
-    userId
+    ownerId
   });
 }
 

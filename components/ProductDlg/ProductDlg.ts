@@ -18,6 +18,7 @@ export function useProductLogic() {
   const rules = computed(() => {
     return {
       name: [ValidationsRules.required],
+      description: [ValidationsRules.required],
       price: [ValidationsRules.required],
       categories: [ValidationsRules.required],
       photo: [ValidationsRules.required, ValidationsRules.photoSize]
