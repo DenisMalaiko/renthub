@@ -1,13 +1,14 @@
 import {gql} from "graphql-tag";
 
 export const GET_PRODUCTS_BY_USER = gql`
-  query products($userId: String!){
-    productsByUser(userId: $userId) {
+  query products($ownerId: String!){
+    productsByUser(ownerId: $ownerId) {
       _id
       name
+      description
       price
       photo
-      user {
+      owner {
         _id
         name
         login
@@ -26,9 +27,10 @@ export const GET_PRODUCT_BY_ID = gql`
         product(productId: $productId) {
             _id
             name
+            description
             price
             photo
-            user {
+            owner {
                 _id
                 name
                 login
@@ -47,9 +49,10 @@ export const GET_PRODUCTS = gql`
     products {
       _id
       name
+      description  
       price
       photo
-      user {
+      owner {
         _id
         name
         login
@@ -114,9 +117,16 @@ export const GET_BOOKINGS_BY_USER = gql`
             product {
                 _id
                 name
+                description
                 price
                 photo
             }
         }
     }
 `;
+
+export const ASK_LANG_CHAIN = gql`
+    query askLangChain($prompt: String!) {
+        askLangChain(prompt: $prompt)
+    }
+`

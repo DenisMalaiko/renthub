@@ -20,9 +20,10 @@ export const ProductModule = defineStore('productModule', {
       await mutate({
         productInput: {
           name: product?.name,
+          description: product?.description,
           price: product?.price,
           photo: `${config.public.API_URL}${uploadedPhoto.url}`,
-          user: product?.user,
+          owner: product?.user,
           categories: product?.categories || [],
         },
       }).then((response) => {
@@ -49,11 +50,13 @@ export const ProductModule = defineStore('productModule', {
     },
     async getProductsByUser() {
       const userModule = UserModule();
-      const userId = userModule.user._id;
-      const { result } = await getProductsByUser(userId);
+      const ownerId = userModule.user._id;
+      console.log("USER ID ", ownerId)
+      const { result } = await getProductsByUser(ownerId);
 
       watchEffect(() => {
         if (result.value) {
+          console.log("PRODUCTS USER ", result.value?.productsByUser)
           this.productsUser = result.value?.productsByUser;
         }
       });

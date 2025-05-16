@@ -5,9 +5,10 @@ export const CREATE_PRODUCT = gql`
     createProduct(productInput: $productInput) {
       _id
       name
+      description
       price
       photo
-      user {
+      owner {
         _id
         name
         login
@@ -89,6 +90,7 @@ export const BOOK_PRODUCT = gql`
       product {
         _id
         name
+        description
         price
         photo
       }

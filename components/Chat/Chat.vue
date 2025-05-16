@@ -6,12 +6,13 @@
       </div>
 
       <div class="chat-messages-list">
-        <div class="message my">
-          Hello
-        </div>
-
-        <div class="message">
-          Hello
+        <div
+          v-for="(message, index) in messages"
+          :key="index"
+          class="message"
+          :class="{'AI': message.sender === 'AI'}"
+        >
+          {{message.message}}
         </div>
       </div>
 
@@ -19,11 +20,11 @@
         <v-textarea
           v-model="message"
           label="Message"
-          rows="1"
+          rows="2"
           hide-details
         ></v-textarea>
 
-        <v-btn color="primary" @click="sendMessage">
+        <v-btn color="primary" @click="sendMessage" :loading="loading" :disabled="loading" >
           <v-icon>mdi-send</v-icon>
         </v-btn>
       </div>
@@ -37,7 +38,16 @@
 
 <script setup lang="ts">
 import { useChatLogic } from "~/components/Chat/Chat";
-const { title, isOpen, open, message, sendMessage } = useChatLogic();
+
+const {
+  title,
+  isOpen,
+  open,
+  message,
+  sendMessage,
+  messages,
+  loading
+} = useChatLogic();
 </script>
 
 <style src="./Chat.scss" lang="scss"></style>

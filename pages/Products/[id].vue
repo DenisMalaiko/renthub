@@ -25,6 +25,7 @@
         <v-col cols="6">
           <h2>{{product.name}}</h2>
           <b>$ {{product.price}}</b>
+          <p>{{product.description}}</p>
           <p>Categories: {{ categories }}</p>
           <v-btn class="mt-3" color="primary" @click="bookProduct" :disabled="!isAuth || isOwner">Book Product</v-btn>
         </v-col>

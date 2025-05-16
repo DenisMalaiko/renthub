@@ -14,6 +14,14 @@
             class="mb-2"
           ></v-text-field>
 
+          <v-textarea
+            v-model="addProductForm.description"
+            :rules="rules.description"
+            label="Description"
+            rows="2"
+            class="mb-2"
+          ></v-textarea>
+
           <v-text-field
             v-model.number="addProductForm.price"
             :rules="rules.price"

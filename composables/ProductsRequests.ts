@@ -13,9 +13,9 @@ export const getProductById = async (productId: string) => {
   });
 }
 
-export const getProductsByUser = async (userId: string) => {
+export const getProductsByUser = async (ownerId: string) => {
   return useQuery(GET_PRODUCTS_BY_USER, {
-    userId
+    ownerId
   });
 }
 
@@ -66,9 +66,3 @@ export const uploadPhoto = async (file: File) => {
   }
 };
 
-/*
-export const uploadPhoto = async () => {
-  return useMutation(UPLOAD_PHOTO, {
-    context: { hasUpload: true }
-  });
-}*/
