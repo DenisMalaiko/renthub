@@ -22,6 +22,7 @@ export function useChatLogic() {
     loading.value = true;
 
     const { result  } = await askLangChain(message.value);
+    message.value = "";
 
     watchEffect(() => {
       if (result.value) {
@@ -32,7 +33,6 @@ export function useChatLogic() {
         });
 
         loading.value = false;
-        message.value = "";
       }
     });
   }

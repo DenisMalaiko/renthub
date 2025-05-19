@@ -23,7 +23,7 @@ export const ProductModule = defineStore('productModule', {
           description: product?.description,
           price: product?.price,
           photo: `${config.public.API_URL}${uploadedPhoto.url}`,
-          owner: product?.user,
+          owner: product?.owner,
           categories: product?.categories || [],
         },
       }).then((response) => {
