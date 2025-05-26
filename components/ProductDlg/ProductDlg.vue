@@ -25,7 +25,7 @@
           <v-text-field
             v-model.number="addProductForm.price"
             :rules="rules.price"
-            label="Price"
+            label="Price per day"
             class="mb-2"
           ></v-text-field>
 

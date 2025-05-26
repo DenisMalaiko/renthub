@@ -1,8 +1,10 @@
-import { ref, watch, reactive } from 'vue';
+import {ref, watch, reactive, computed, onMounted} from 'vue';
 import {useRuntimeConfig} from "nuxt/app";
+import {CategoryModule} from "~/store/categories";
 
 export function setupSearchComponent() {
   const config = useRuntimeConfig();
+  const categoryModule = CategoryModule();
   const loading = reactive({
     city: false,
     product: false
@@ -11,15 +13,21 @@ export function setupSearchComponent() {
   const searchForm = reactive({
     city: null,
     product: null,
-    startDate: null,
-    endDate: null,
+    categories: null,
+    range: null,
   });
-  const menuStart = ref(false);
-  const menuEnd = ref(false);
   const searchProductQuery = ref('');
   const products: any = ref([]);
   const searchCityQuery = ref('');
   let cities: any = ref([]);
+
+  onMounted(async () => {
+    await categoryModule.getCategories();
+  })
+
+  const categories = computed(() => {
+    return categoryModule.categories;
+  })
 
   async function searchPlaces(city: string) {
     const url = `${config.public.API_URL}/searchCity?city=${encodeURIComponent(city)}`;
@@ -28,7 +36,6 @@ export function setupSearchComponent() {
       loading.city = true;
       const response = await fetch(url);
       const data = await response.json();
-      console.log("RESPONSE ", data)
       cities.value = data;
       loading.city = false;
     } catch (error) {
@@ -37,15 +44,7 @@ export function setupSearchComponent() {
     }
   }
 
-  /*watch(searchForm.city, (newValue: any) => {
-    console.log("WATCH ", newValue)
-    if(newValue && newValue.length >= 2) {
-      searchPlaces(newValue);
-    }
-  });*/
-
   watch(() => searchForm.city, (newValue: any) => {
-    console.log("WATCH ", newValue)
     if (newValue && newValue.length >= 2) {
       searchPlaces(newValue);
     }
@@ -55,11 +54,10 @@ export function setupSearchComponent() {
     loading,
     today,
     searchForm,
-    menuStart,
-    menuEnd,
     searchProductQuery,
     products,
     searchCityQuery,
     cities,
+    categories
   };
 }

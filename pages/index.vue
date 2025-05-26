@@ -2,10 +2,10 @@
   <section class="section home">
     <SearchNav />
 
-    <Loader v-if="loading"/>
+    <Loader v-if="!products"/>
 
     <section v-else>
-      <v-container>
+      <v-container class="px-0">
         <v-row>
           <v-col v-for="product in products" :key="product._id" cols="3">
             <ProductCard :product="product" :isProfile="false" />

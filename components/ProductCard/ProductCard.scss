@@ -1,6 +1,12 @@
 .product-card {
   position: relative;
 
+  .v-card-text {
+    p {
+      color: rgba(0,0,0,0.6);
+    }
+  }
+
   .v-card-actions {
     position: absolute;
     top: 0;

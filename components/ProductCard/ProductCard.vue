@@ -1,12 +1,12 @@
 <template>
   <v-card class="product-card">
     <NuxtLink :to="`/products/${product._id}`">
-      <v-img :src="product.photo" contain height="250px" alt="no image"></v-img>
+      <v-img :src="product.photo" cover height="250px" alt="no image"></v-img>
     </NuxtLink>
 
     <v-card-text>
       <h3>{{product.name}}</h3>
-      <b>{{product.price}} $</b>
+      <p>${{product.price}} per day</p>
     </v-card-text>
 
     <v-card-actions v-if="isAuth && isProfile">
@@ -23,16 +23,10 @@
 import { useCardLogic } from "./ProductCard.ts";
 import {Product} from "~/models/Product";
 
-defineProps({
-  product: {
-    type: Product,
-    required: true
-  },
-  isProfile: {
-    type: Boolean,
-    required: true
-  }
-})
+const { product, isProfile } = defineProps<{
+  product: Product
+  isProfile: boolean
+}>()
 
 const { deleteProduct, isAuth } = useCardLogic();
 </script>
