@@ -3,12 +3,13 @@
 </script>
 
 <template>
-  <v-progress-linear
-    color="light-green-darken-2"
-    height="3"
-    indeterminate
-    rounded
-  ></v-progress-linear>
+  <div class="w-100 d-flex justify-center">
+    <v-progress-circular
+      :size="50"
+      color="primary"
+      indeterminate
+    ></v-progress-circular>
+  </div>
 </template>
 
 <style scoped>

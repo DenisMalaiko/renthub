@@ -23,6 +23,7 @@ config.global.stubs = {
   'v-file-input': { template: '<div><slot /></div>'},
   'v-radio-group': { template: '<div><slot /></div>'},
   'v-radio': { template: '<div><slot /></div>'},
+  'v-textarea': { template: '<div><slot /></div>'},
 
   NuxtLink: {
     props: ['to'],

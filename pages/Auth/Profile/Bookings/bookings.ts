@@ -18,7 +18,6 @@ export function useBookingsLogic() {
     })
   });
 
-
   onMounted(async () => {
     await bookingsModule.getBookingsByUser()
   })

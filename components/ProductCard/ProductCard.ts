@@ -8,10 +8,7 @@ export function useCardLogic() {
   const isAuth = userModule.user.token;
 
   const deleteProduct = async (id: string) => {
-    console.log("DELETE PRODUCT ", id);
     await productModel.deleteProduct(id);
-
-    console.log("Successfully deleted!")
   }
 
   return {

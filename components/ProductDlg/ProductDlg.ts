@@ -45,8 +45,6 @@ export function useProductLogic() {
 
     loading.value = true;
 
-    console.log("ADD PRODUCT ", formValue)
-
     await productModule.addProduct(formValue)
       .then(() => {
         console.log("SUCCESS ADDED DIALOG")

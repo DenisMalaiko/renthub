@@ -10,8 +10,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      API_URL: 'https://renthub-api.onrender.com',
-      //API_URL: 'http://localhost:8080',
+      //API_URL: 'https://renthub-api.onrender.com',
+      API_URL: 'http://localhost:8080',
       DATE_FORMAT: 'DD/MM/YYYY',
     }
   },
