@@ -29,6 +29,15 @@
             class="mb-2"
           ></v-text-field>
 
+          <v-combobox
+            v-model="addProductForm.city"
+            v-model:search="searchCityQuery"
+            :items="cities"
+            item-title="cityName"
+            label="Where"
+            :loading="loadingCity"
+          />
+
           <v-select
             v-model="addProductForm.categories"
             v-model:search="searchCategoryQuery"
@@ -69,7 +78,7 @@
 <script setup lang="ts">
 import { useProductLogic } from "./ProductDlg.ts";
 
-const { dialog, loading, addProductForm, addProductFormRef, searchCategoryQuery, rules, categories, open, close, addProduct } = useProductLogic();
+const { dialog, loading, addProductForm, addProductFormRef, searchCategoryQuery, searchCityQuery, cities, loadingCity, rules, categories, open, close, addProduct } = useProductLogic();
 
 defineExpose({
   open

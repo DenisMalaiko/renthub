@@ -8,6 +8,13 @@ export const CREATE_PRODUCT = gql`
       description
       price
       photo
+      city {
+        cityId
+        cityName
+        countryId
+        countryName
+        fullAddress
+      }
       owner {
         _id
         name
@@ -72,8 +79,7 @@ export const BOOK_PRODUCT = gql`
   mutation booking ($bookingInput: BookingInput!) {
     bookProduct(bookingInput: $bookingInput) {
       _id
-      startDate
-      endDate
+      range
       createdAt
       owner {
         _id
@@ -93,6 +99,13 @@ export const BOOK_PRODUCT = gql`
         description
         price
         photo
+        city {
+          cityId
+          cityName
+          countryId
+          countryName
+          fullAddress
+        }
       }
     }
   }

@@ -16,8 +16,7 @@ export const BookingModule = defineStore('bookingModule', {
 
       await mutate({
         bookingInput: {
-          startDate: booking?.startDate,
-          endDate: booking?.endDate,
+          range: booking?.range,
           createdAt: booking?.createdAt,
           owner: booking?.ownerId,
           renter: booking?.renterId,
@@ -31,7 +30,6 @@ export const BookingModule = defineStore('bookingModule', {
     },
 
     async deleteBooking(bookingId: string) {
-      console.log("DELETE BOOKING ", bookingId)
       const { mutate } = await deleteBooking();
 
       await mutate({

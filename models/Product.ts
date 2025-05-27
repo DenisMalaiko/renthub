@@ -1,4 +1,4 @@
-import {UserProfile} from "~/models/user/UserProfile";
+import {City} from "~/models/City";
 
 export class Product {
   name: string | null;
@@ -7,6 +7,7 @@ export class Product {
   categories?: [] | null;
   owner: string | null;
   photo: File | BlobPart | string | null | any;
+  city : City | null;
 
   constructor(owner: string) {
     this.name = null;
@@ -15,5 +16,6 @@ export class Product {
     this.categories = null;
     this.owner = owner ?? null;
     this.photo = null;
+    this.city = new City();
   }
 }
