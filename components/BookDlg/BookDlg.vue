@@ -7,17 +7,11 @@
 
       <v-card-text>
         <v-date-input
-          v-model="bookingForm.startDate"
+          v-model="bookingForm.range"
+          label="Dates"
+          max-width="368"
+          multiple="range"
           :min="today"
-          label="Start Date"
-          hide-actions
-        ></v-date-input>
-
-        <v-date-input
-          v-model="bookingForm.endDate"
-          :min="bookingForm.startDate"
-          label="End Date"
-          hide-actions
         ></v-date-input>
       </v-card-text>
 

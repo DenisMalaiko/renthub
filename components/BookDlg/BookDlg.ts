@@ -32,9 +32,6 @@ export function BookDlgLogic() {
     dialog.value = true;
     isEditBooking.value = true;
     bookingId.value = data._id;
-
-    bookingForm.startDate = data.start;
-    bookingForm.endDate = data.end;
   }
 
   function close(): void {
@@ -77,17 +74,6 @@ export function BookDlgLogic() {
       })
     }
   }
-
-  watch(
-    () => bookingForm.startDate,
-    (newValue, oldValue) => {
-      if (isEditBooking) return;
-
-      const end = new Date(newValue);
-      end.setDate(end.getDate() + 1);
-      bookingForm.endDate = end;
-    }
-  )
 
   return {
     dialog,

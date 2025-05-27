@@ -14,6 +14,13 @@ export const GET_PRODUCTS_BY_USER = gql`
         login
         email
       }
+      city {
+        cityId
+        cityName
+        countryId
+        countryName
+        fullAddress
+      }
       categories {
         _id
         name
@@ -36,6 +43,13 @@ export const GET_PRODUCT_BY_ID = gql`
                 login
                 email
             }
+            city {
+                cityId
+                cityName
+                countryId
+                countryName
+                fullAddress
+            }
             categories {
                 _id
                 name
@@ -57,6 +71,13 @@ export const GET_PRODUCTS = gql`
         name
         login
         email
+      }
+      city {
+        cityId
+        cityName
+        countryId
+        countryName
+        fullAddress
       }
       categories {
         _id
@@ -120,6 +141,13 @@ export const GET_BOOKINGS_BY_USER = gql`
                 description
                 price
                 photo
+                city {
+                    cityId
+                    cityName
+                    countryId
+                    countryName
+                    fullAddress
+                }
             }
         }
     }

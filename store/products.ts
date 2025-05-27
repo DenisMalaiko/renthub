@@ -25,6 +25,7 @@ export const ProductModule = defineStore('productModule', {
           photo: `${config.public.API_URL}${uploadedPhoto.url}`,
           owner: product?.owner,
           categories: product?.categories || [],
+          city: product?.city
         },
       }).then((response) => {
         this.getProductsByUser();
