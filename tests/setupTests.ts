@@ -24,6 +24,12 @@ config.global.stubs = {
   'v-radio-group': { template: '<div><slot /></div>'},
   'v-radio': { template: '<div><slot /></div>'},
   'v-textarea': { template: '<div><slot /></div>'},
+  'v-list': { template: '<div><slot /></div>'},
+  'v-list-subheader': { template: '<div><slot /></div>'},
+  'v-list-item': { template: '<div><slot /></div>'},
+  'v-list-item-action': { template: '<div><slot /></div>'},
+  'v-checkbox-btn': { template: '<div><slot /></div>'},
+  'v-icon': { template: '<div><slot /></div>'},
 
   NuxtLink: {
     props: ['to'],
