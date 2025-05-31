@@ -183,6 +183,7 @@ export const GET_PRODUCTS_BY_SEARCH = gql`
             categories {
                 _id
                 name
+                icon
             }
         }
     }
