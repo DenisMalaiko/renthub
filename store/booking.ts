@@ -8,7 +8,7 @@ import {watchEffect} from "vue";
 export const BookingModule = defineStore('bookingModule', {
   state: () => ({
     bookings: null,
-    bookingsUser: []
+    bookingsUser: [] as any[]
   }),
   actions: {
     async bookProduct(booking: Booking | any) {
@@ -46,7 +46,19 @@ export const BookingModule = defineStore('bookingModule', {
 
       watchEffect(() => {
         if (result.value) {
-          this.bookingsUser = result.value?.bookingsByUser;
+          const bookings: any[] = []
+
+          result.value?.bookingsByUser.forEach((booking: any) => {
+            booking.range.forEach((date: Date) => {
+              bookings.push({
+                ...booking,
+                startDate: date,
+                endDate: date
+              })
+            })
+          })
+
+          this.bookingsUser = bookings;
         }
       });
     }

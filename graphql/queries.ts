@@ -92,6 +92,7 @@ export const GET_CATEGORIES = gql`
     categories {
       _id
       name
+      icon
     }
   }
 `
@@ -120,8 +121,7 @@ export const GET_BOOKINGS_BY_USER = gql`
     query bookingsByUser($renterId: String!){
         bookingsByUser(renterId: $renterId) {
             _id
-            startDate
-            endDate
+            range
             createdAt
             owner {
                 _id
@@ -156,5 +156,34 @@ export const GET_BOOKINGS_BY_USER = gql`
 export const ASK_LANG_CHAIN = gql`
     query askLangChain($prompt: String!) {
         askLangChain(prompt: $prompt)
+    }
+`;
+
+export const GET_PRODUCTS_BY_SEARCH = gql`
+    query productsBySearch($productsBySearchInput: ProductsBySearchInput!) {
+        productsBySearch(productsBySearchInput: $productsBySearchInput) {
+            _id
+            name
+            description
+            price
+            photo
+            owner {
+                _id
+                name
+                login
+                email
+            }
+            city {
+                cityId
+                cityName
+                countryId
+                countryName
+                fullAddress
+            }
+            categories {
+                _id
+                name
+            }
+        }
     }
 `

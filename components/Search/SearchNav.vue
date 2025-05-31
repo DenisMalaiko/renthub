@@ -50,14 +50,19 @@
         </v-col>
 
         <v-col cols="1 d-flex align-center justify-end">
-          <v-btn color="primary">
+          <v-btn @click="searchProducts" color="primary">
             Search
           </v-btn>
         </v-col>
       </v-row>
 
-      <v-row>
+      <v-row v-if="isSearch">
         <v-col cols="12">
+          <h4>Search Result <i v-if="!products.length">- Empty</i> </h4>
+        </v-col>
+
+        <v-col v-for="product in products" :key="product._id" cols="3">
+          <ProductCard :product="product" :isProfile="false"/>
         </v-col>
       </v-row>
     </v-container>
@@ -66,6 +71,18 @@
 
 <script setup>
 import { setupSearchComponent } from './SearchNav.ts';
+import ProductCard from "~/components/ProductCard/ProductCard.vue";
 
-const { loading, today, searchForm, searchProductQuery, products, searchCityQuery, cities, categories } = setupSearchComponent();
+const {
+  loading,
+  today,
+  searchForm,
+  searchProductQuery,
+  searchProducts,
+  products,
+  searchCityQuery,
+  cities,
+  categories,
+  isSearch
+} = setupSearchComponent();
 </script>

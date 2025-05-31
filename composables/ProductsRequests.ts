@@ -1,5 +1,11 @@
 import { useQuery, useMutation } from "@vue/apollo-composable";
-import {GET_PRODUCTS, GET_PRODUCTS_BY_USER, GET_CATEGORIES, GET_PRODUCT_BY_ID} from "~/graphql/queries";
+import {
+  GET_PRODUCTS,
+  GET_PRODUCTS_BY_USER,
+  GET_CATEGORIES,
+  GET_PRODUCT_BY_ID,
+  GET_PRODUCTS_BY_SEARCH
+} from "~/graphql/queries";
 import {CREATE_PRODUCT, DELETE_PRODUCT, UPLOAD_PHOTO} from "~/graphql/mutations";
 import {useRuntimeConfig} from "nuxt/app";
 
@@ -16,6 +22,12 @@ export const getProductById = async (productId: string) => {
 export const getProductsByUser = async (ownerId: string) => {
   return useQuery(GET_PRODUCTS_BY_USER, {
     ownerId
+  });
+}
+
+export const getProductsSearch = async (productsBySearchInput: any) => {
+  return useQuery(GET_PRODUCTS_BY_SEARCH, {
+    productsBySearchInput
   });
 }
 

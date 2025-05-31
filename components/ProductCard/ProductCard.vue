@@ -7,6 +7,7 @@
     <v-card-text>
       <h3>{{product.name}}</h3>
       <p>${{product.price}} per day</p>
+      <span>{{product?.city?.fullAddress}}</span>
     </v-card-text>
 
     <v-card-actions v-if="isAuth && isProfile">
