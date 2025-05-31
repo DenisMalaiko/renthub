@@ -1,15 +1,16 @@
 import { defineStore } from "pinia";
 import { Product } from "~/models/Product";
-import { addProduct, getProducts, getProductsByUser, getProductById, uploadPhoto, deleteProduct } from "~/composables/ProductsRequests";
+import { addProduct, getProducts, getProductsByUser, getProductsSearch, uploadPhoto, deleteProduct, getProductById } from "~/composables/ProductsRequests";
 import { watchEffect } from "vue";
 import { UserModule } from "~/store/user";
 import { useRuntimeConfig } from "nuxt/app";
 
 export const ProductModule = defineStore('productModule', {
   state: () => ({
-    products: [],
     product: [],
-    productsUser: []
+    products: [],
+    productsUser: [],
+    productsSearch: [],
   }),
   actions: {
     async addProduct(product: Product | any) {
@@ -52,12 +53,10 @@ export const ProductModule = defineStore('productModule', {
     async getProductsByUser() {
       const userModule = UserModule();
       const ownerId = userModule.user._id;
-      console.log("USER ID ", ownerId)
       const { result } = await getProductsByUser(ownerId);
 
       watchEffect(() => {
         if (result.value) {
-          console.log("PRODUCTS USER ", result.value?.productsByUser)
           this.productsUser = result.value?.productsByUser;
         }
       });
@@ -68,6 +67,15 @@ export const ProductModule = defineStore('productModule', {
       watchEffect(() => {
         if (result.value) {
           this.product = result.value?.product;
+        }
+      });
+    },
+    async getProductsSearch(searchForm: any) {
+      const { result } = await getProductsSearch(searchForm);
+
+      watchEffect(() => {
+        if (result.value) {
+          this.productsSearch = result.value?.productsBySearch;
         }
       });
     }

@@ -5,7 +5,7 @@
         <span>{{title}}</span>
       </div>
 
-      <div class="chat-messages-list">
+      <div ref="chatMessagesList" class="chat-messages-list">
         <div
           v-for="(message, index) in messages"
           :key="index"
@@ -22,6 +22,7 @@
           label="Message"
           rows="2"
           hide-details
+          @keydown.enter.exact.prevent="sendMessage"
         ></v-textarea>
 
         <v-btn color="primary" @click="sendMessage" :loading="loading" :disabled="loading" >
@@ -46,7 +47,8 @@ const {
   message,
   sendMessage,
   messages,
-  loading
+  loading,
+  chatMessagesList
 } = useChatLogic();
 </script>
 

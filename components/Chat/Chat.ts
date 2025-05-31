@@ -3,6 +3,7 @@ import { askLangChain } from "~/composables/LangChainRequests";
 
 export function useChatLogic() {
   const title = ref("AI Support");
+  const chatMessagesList = ref(null)
   const isOpen = ref(false);
   const message = ref("");
   const messages: any = reactive([]);
@@ -11,6 +12,13 @@ export function useChatLogic() {
   const open = () => {
     isOpen.value = !isOpen.value;
     message.value = "";
+  }
+
+  const scrollToBottom = () => {
+    const el = chatMessagesList.value;
+    if (el) {
+      el.scrollTop = el.scrollHeight
+    }
   }
 
   const sendMessage = async () => {
@@ -33,6 +41,10 @@ export function useChatLogic() {
         });
 
         loading.value = false;
+
+        setTimeout(() => {
+          scrollToBottom()
+        }, 100);
       }
     });
   }
@@ -44,6 +56,7 @@ export function useChatLogic() {
     message,
     sendMessage,
     messages,
-    loading
+    loading,
+    chatMessagesList
   }
 }
