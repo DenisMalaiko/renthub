@@ -37,7 +37,7 @@
 
           <v-col cols="9">
             <v-row>
-              <v-col v-for="product in products" :key="product._id" cols="4">
+              <v-col v-for="product in data" :key="product._id" cols="4">
                 <ProductCard :product="product" :isProfile="false" />
               </v-col>
             </v-row>
@@ -54,5 +54,5 @@ import Loader from "~/components/Loader/Loader.vue";
 import ProductCard from "~/components/ProductCard/ProductCard.vue";
 import {useHomeLogic} from "~/pages/home";
 
-const { products, categories, selectedCategories, loading } = useHomeLogic();
+const { products, categories, selectedCategories, data, loading } = useHomeLogic();
 </script>

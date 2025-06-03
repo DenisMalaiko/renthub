@@ -1,6 +1,7 @@
 import {ProductModule} from "~/store/products";
 import {CategoryModule} from "~/store/categories";
 import {computed, onMounted, ref} from "vue";
+import {useFetch} from "nuxt/app";
 
 export function useHomeLogic() {
   const productModule = ProductModule();
@@ -28,12 +29,14 @@ export function useHomeLogic() {
       })
   });
 
+  const { data, error } = useFetch('api/products');
   const categories = computed(() => categoryModule.categories);
 
   return {
     products,
     categories,
     selectedCategories,
-    loading
+    loading,
+    data
   }
 }

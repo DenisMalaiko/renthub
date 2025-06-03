@@ -20,6 +20,7 @@
     "@vue/apollo-composable": "^4.2.1",
     "@vue/tsconfig": "^0.5.1",
     "apollo-upload-client": "^18.0.1",
+    "cross-fetch": "^4.1.0",
     "graphql": "^16.10.0",
     "izitoast": "^1.4.0",
     "moment": "^2.30.1",
