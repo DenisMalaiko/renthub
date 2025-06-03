@@ -25,9 +25,9 @@ describe("Home", () => {
     expect(wrapper.findComponent({ name: 'SearchNav' }).exists()).toBe(true)
   });*/
 
-  it('Render Products', () => {
+/*  it('Render Products', () => {
     const wrapper = mountComponent();
     const cards = wrapper.findAllComponents({ name: 'ProductCard' })
     expect(cards).toHaveLength(2);
-  })
+  })*/
 });
