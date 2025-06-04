@@ -2,7 +2,7 @@
   <section class="section home">
     <SearchNav />
 
-    <Loader v-if="!products"/>
+    <Loader v-if="!loading"/>
 
     <section v-else>
       <v-container class="px-0">
@@ -16,17 +16,17 @@
               <v-list-subheader>Categories</v-list-subheader>
 
               <v-list-item
-                  v-for="item in categories"
-                  :key="item._id"
-                  :title="item.name"
-                  :value="item._id"
+                v-for="item in data?.categories"
+                :key="item._id"
+                :title="item.name"
+                :value="item._id"
               >
                 <template v-slot:prepend="{ isSelected, select }">
                   <v-list-item-action start>
                     <v-checkbox-btn
-                        :model-value="isSelected"
-                        @update:model-value="select"
-                        color="primary"
+                      :model-value="isSelected"
+                      @update:model-value="select"
+                      color="primary"
                     />
                     <v-icon>{{ item.icon }}</v-icon>
                   </v-list-item-action>
@@ -37,7 +37,7 @@
 
           <v-col cols="9">
             <v-row>
-              <v-col v-for="product in data" :key="product._id" cols="4">
+              <v-col v-for="product in products" :key="product._id" cols="4">
                 <ProductCard :product="product" :isProfile="false" />
               </v-col>
             </v-row>
@@ -49,10 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import SearchNav from "~/components/Search/SearchNav.vue";
 import Loader from "~/components/Loader/Loader.vue";
+import SearchNav from "~/components/Search/SearchNav.vue";
 import ProductCard from "~/components/ProductCard/ProductCard.vue";
-import {useHomeLogic} from "~/pages/home";
+import { useHomeLogic } from "~/pages/home";
 
-const { products, categories, selectedCategories, data, loading } = useHomeLogic();
+const { products, selectedCategories, data, loading } = useHomeLogic();
 </script>

@@ -18,11 +18,16 @@ export default defineNuxtConfig({
 
   devtools: { enabled: false },
 
-  modules: ["vuetify-nuxt-module", "@pinia/nuxt", //"@vite-pwa/nuxt",
-  '@nuxt/test-utils/module', 'nuxt-toast'],
+  modules: [
+    "vuetify-nuxt-module",
+    "@pinia/nuxt",
+    "nuxt-toast",
+    // "@vite-pwa/nuxt",
+    // "@nuxt/test-utils/module",
+  ],
 
   // Вимикає SSR (важливо для PWA)
-  ssr: false,
+  ssr: true,
   target: 'static',
 
   vite: {
@@ -31,7 +36,7 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa: {
+  /*pwa: {
     //registerType: 'autoUpdate',
     manifest: {
       name: "Renthub",
@@ -42,7 +47,7 @@ export default defineNuxtConfig({
     },
     workbox: {
       navigateFallback: "/",
-      globPatterns: ["**/*.{js,css,html,png,svg,ico,json}"],
+      globPatterns: ["**!/!*.{js,css,html,png,svg,ico,json}"],
       cleanupOutdatedCaches: true,
       runtimeCaching: [
         {
@@ -77,16 +82,16 @@ export default defineNuxtConfig({
         },
       ],
     },
-    /*selfDestroying: false, // Вимкни, якщо хочеш кастомний SW
+    /!*selfDestroying: false, // Вимкни, якщо хочеш кастомний SW
     injectRegister: "script", // Автоматично реєструвати SW
     strategies: "injectManifest",
     srcDir: "public",
-    filename: "custom-sw.js", // 🔥 Використовуємо наш кастомний SW*/
+    filename: "custom-sw.js", // 🔥 Використовуємо наш кастомний SW*!/
     devOptions: {
       enabled: true,
       type: "module"
     }
-  },
+  },*/
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],

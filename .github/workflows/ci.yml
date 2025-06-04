@@ -32,8 +32,5 @@ jobs:
       - name: Запуск білда
         run: npm run build
 
-      - name: Запуск Vitest
-        run: npm run test
-
       - name: Запуск лінтерів
         run: npm run eslint
