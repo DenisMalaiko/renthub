@@ -2,7 +2,7 @@
   <section class="section home">
     <SearchNav />
 
-    <Loader v-if="!loading"/>
+    <Loader v-if="loading"/>
 
     <section v-else>
       <v-container class="px-0">

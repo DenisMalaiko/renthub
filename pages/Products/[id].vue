@@ -1,6 +1,8 @@
 <template>
-  <section class="section">
-   <v-alert
+  <Loader v-if="loading"/>
+
+  <section v-else class="section">
+    <v-alert
       v-if="!isAuth"
       color="info"
       icon="$info"
@@ -19,13 +21,13 @@
     <v-container>
       <v-row>
         <v-col cols="6">
-          <v-img :src="product.photo"></v-img>
+          <v-img :src="product?.photo"></v-img>
         </v-col>
 
         <v-col cols="6">
-          <h2>{{product.name}}</h2>
-          <b>$ {{product.price}}</b>
-          <p>{{product.description}}</p>
+          <h2>{{product?.name}}</h2>
+          <b>$ {{product?.price}}</b>
+          <p>{{product?.description}}</p>
           <p>Categories: {{ categories }}</p>
           <v-btn class="mt-3" color="primary" @click="bookProduct" :disabled="!isAuth || isOwner">Book Product</v-btn>
         </v-col>
@@ -37,8 +39,9 @@
 </template>
 
 <script setup lang="ts">
+import Loader from "~/components/Loader/Loader.vue";
 import BookDlg from "~/components/BookDlg/BookDlg.vue";
-import {useProductLogic} from "~/pages/Products/product";
+import { useProductLogic } from "~/pages/Products/product";
 
 const {
   product,
@@ -46,7 +49,8 @@ const {
   bookProduct,
   bookDlgRef,
   isAuth,
-  isOwner
+  isOwner,
+  loading
 } = useProductLogic()
 </script>
 

@@ -7,16 +7,17 @@ import { RequestStatus } from "~/enum/RequestStatus";
 
 export function useHomeLogic() {
   const toast = useToast()
-  const loading = ref(true);
+  const loading = ref(false);
   const selectedCategories = ref<string[]>([]);
 
   const { data } = useAsyncData<{ products: Product[]; categories: Category[] }>('home-page', async () => {
     try {
+      loading.value = true;
+
       const [products, categories] = await Promise.allSettled([
         $fetch<Product[]>(`/api/products`),
         $fetch<Category[]>(`/api/categories`),
       ]);
-      loading.value = false;
 
       return {
         products: products.status === RequestStatus.Fulfilled ? products.value : [],
@@ -31,6 +32,8 @@ export function useHomeLogic() {
       });
 
       return { products: [], categories: [] }
+    } finally {
+      loading.value = false;
     }
   });
 
