@@ -12,24 +12,33 @@
 
     <v-card-actions v-if="isAuth && isProfile">
       <v-btn
+        @click="updateProduct(product._id)"
+        color="primary"
+        icon="mdi-pen"
+      ></v-btn>
+
+      <v-btn
         @click="deleteProduct(product._id)"
         color="red"
         icon="mdi-delete"
       ></v-btn>
     </v-card-actions>
   </v-card>
+
+  <ConfirmDlg ref="refConfirmDlg"/>
 </template>
 
 <script setup lang="ts">
 import { useCardLogic } from "./ProductCard.ts";
 import {Product} from "~/models/Product";
+import ConfirmDlg from "~/components/ConfirmDlg/ConfirmDlg.vue";
 
 const { product, isProfile } = defineProps<{
   product: Product
   isProfile: boolean
 }>()
 
-const { deleteProduct, isAuth } = useCardLogic();
+const { deleteProduct, updateProduct, isAuth, refConfirmDlg } = useCardLogic();
 </script>
 
 <style src="./ProductCard.scss" lang="scss" scoped></style>
