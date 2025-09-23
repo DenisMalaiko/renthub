@@ -53,6 +53,5 @@ import Loader from "~/components/Loader/Loader.vue";
 import SearchNav from "~/components/Search/SearchNav.vue";
 import ProductCard from "~/components/ProductCard/ProductCard.vue";
 import { useHomeLogic } from "~/pages/home";
-
 const { products, selectedCategories, data, loading } = useHomeLogic();
 </script>

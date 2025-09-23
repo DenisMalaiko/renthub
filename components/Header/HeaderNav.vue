@@ -15,6 +15,13 @@
         <v-col cols="3">
           <div class="header-menu">
             <ul class="header-menu-list">
+              <li class="link">
+                <NuxtLink to="/test">
+                  <b> TEST </b>
+                </NuxtLink>
+                |
+              </li>
+
               <li v-if="user?.token?.length" class="link" >
                 <NuxtLink to="/auth/profile">
                   <b> {{user.name}} </b>
