@@ -15,12 +15,52 @@
 
     <h3>Emit</h3>
     <v-btn @click="click">Click</v-btn>
-    <br><hr><br><br><br>
+    <br><hr><br><br><br><br><br>
 
-    <h3>Ref/ShallowRef</h3>
-    <pre> {{ refValue }} </pre>
+
+    <h3>To DO List</h3>
+    <ul>
+      <li
+        v-for="item in arr"
+        :key="item.id"
+        v-memo="[item.done]"
+        class="mb-2 d-flex justify-lg-space-between"
+        style="width: 500px"
+      >
+        <div>
+          <b>Name: {{ item.name }}</b>
+          <p>Done: {{ item.done ? "True" : "False" }} </p>
+        </div>
+
+        <div>
+          <v-btn @click="completeItem(item.id)" class="mr-4">Complete</v-btn>
+          <v-btn :disabled="!item.done" @click="deleteItem(item.id)">Delete</v-btn>
+        </div>
+      </li>
+    </ul>
+    <v-btn @click="addItem">Add</v-btn>
+    <br><br><br><br>
+
+    <h3>V-MEMO</h3>
+    <v-btn @click="next">Next</v-btn>
+    <div v-for="item in items" :key="item" v-memo="[item === selected]">
+      <p>ID: {{ item }} - selected: {{ item === selected }}</p>
+    </div>
+    <br><hr><br><br>
+
+
+    <h3>Ref / ShallowRef</h3>
+    <pre> {{ refValue.nested.count }} </pre>
     <pre> {{ shallowRefValue }} </pre>
     <v-btn @click="count">Count</v-btn>
+    <br><hr><br><br>
+
+    <h3>Reactive / ShallowReactive</h3>
+    <pre> {{ reactiveValue.nested.count }} </pre>
+    <pre> {{ reactiveShallow.nested.count }} </pre>
+    <pre> {{ state }} </pre>
+    <v-btn @click="countReactive">Count</v-btn>
+    <br>
 
   </div>
 </template>
@@ -34,7 +74,8 @@ import {
   onMounted,
   onUnmounted,
   onUpdated,
-  ref,
+  reactive,
+  ref, shallowReactive,
   shallowRef
 } from "vue";
 
@@ -46,7 +87,6 @@ const emits = defineEmits(['update:title', 'myCustomEvent'])
 const updateTitle = (value: string) => {
   emits('update:title', value)
 }
-
 
 // Emit
 const click = () => {
@@ -67,11 +107,79 @@ const messageComputed = computed({
 
 // Ref / ShallowRef
 const refValue = ref({ nested: { count: 1 } });
-const shallowRefValue = shallowRef({ nested: { count: 1 } });
+const shallowRefValue = shallowRef({ count: 1 })
 const count = () => {
   refValue.value.nested.count++;
-  shallowRefValue.value.nested.count++;
+
+  // does NOT trigger change
+  // shallowRefValue.value.count = 2
+
+  // does trigger change
+  shallowRefValue.value = { count: 2 }
 }
+
+
+// Reactive / shallowReactive
+const reactiveValue = reactive({
+  nested: { count: 1 },
+});
+const reactiveShallow = shallowReactive({
+  nested: { count: 1 },
+});
+const state = shallowReactive({
+  user: { name: 'Ivan' }
+})
+
+const countReactive = () => {
+  reactiveValue.nested.count++;
+  reactiveShallow.nested.count++;
+  state.user.name = 'Oleh'
+}
+
+
+// TODOLIST
+interface Item {
+  id: number;
+  name: string;
+  done: boolean;
+}
+
+/*const arr = reactive<Item[]>([
+  { id: 1, name: "Test", done: false },
+  { id: 2, name: "Test2", done: true },
+  { id: 3, name: "Test3", done: false }
+]);*/
+
+const arr = ref<Item[]>([
+  { id: 1, name: "Test", done: false },
+  { id: 2, name: "Test2", done: true },
+  { id: 3, name: "Test3", done: false }
+]);
+
+let generateId = ref<number>(Math.max(...arr.value.map(x => x.id)) + 1);
+
+const addItem = () => {
+  const newId = generateId.value++
+  arr.value.push({ id: newId, name: `Test${ newId }`, done: false })
+}
+
+const completeItem = (id: number) => {
+  arr.value.find(x => x.id === id)!.done = true;
+}
+
+const deleteItem = (id: number) => {
+  arr.value.splice(arr.value.findIndex(x => x.id === id), 1)
+}
+
+
+// V-MEMO
+const items = ref([1, 2, 3, 4, 5])
+const selected = ref(1)
+
+function next() {
+  selected.value = (selected.value % items.value.length) + 1
+}
+
 
 
 /*console.log("------")
