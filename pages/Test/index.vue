@@ -51,6 +51,8 @@ onUnmounted(() => {
     <v-container class="px-0 mt-10">
       <v-row>
         <v-col cols="12">
+          <h1>!!! ГЛЯНУТИ ДО: WATCH, REACTIVE, SLOTS, Suspense, Dynamic Components !!!</h1>
+
           <p>Parent title: {{ title }}</p>
           <p>Parent description: {{ description }}</p>
         </v-col>
