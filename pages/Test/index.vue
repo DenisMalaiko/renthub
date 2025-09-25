@@ -51,7 +51,7 @@ onUnmounted(() => {
     <v-container class="px-0 mt-10">
       <v-row>
         <v-col cols="12">
-          <h1>!!! ГЛЯНУТИ ДО: WATCH, REACTIVE, SLOTS, Suspense, Dynamic Components !!!</h1>
+          <h1>!!! ГЛЯНУТИ ДО: REACTIVE !!!</h1>
 
           <p>Parent title: {{ title }}</p>
           <p>Parent description: {{ description }}</p>
@@ -62,7 +62,19 @@ onUnmounted(() => {
             v-model:title="title"
             v-model:description="description"
             @myCustomEvent="testClick"
-          />
+          >
+            <template #default>
+              <p>Slot default</p>
+            </template>
+
+            <template #description>
+              <p>Slot description</p>
+            </template>
+
+            <template #user="{ item }">
+              <pre>USER: {{ item }}</pre>
+            </template>
+          </TestComponent>
         </v-col>
       </v-row>
     </v-container>

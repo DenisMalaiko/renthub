@@ -11,11 +11,11 @@
     <p>Origin: {{ message }}</p>
     <p>Computed: {{ messageComputed }}</p>
     <v-text-field v-model="message"/>
-    <hr><br><br>
+    <hr><br>
 
     <h3>Emit</h3>
     <v-btn @click="click">Click</v-btn>
-    <br><hr><br><br><br><br><br>
+    <br><br><hr><br>
 
 
     <h3>To DO List</h3>
@@ -39,28 +39,65 @@
       </li>
     </ul>
     <v-btn @click="addItem">Add</v-btn>
-    <br><br><br><br>
+    <br><br><hr><br>
 
     <h3>V-MEMO</h3>
     <v-btn @click="next">Next</v-btn>
     <div v-for="item in items" :key="item" v-memo="[item === selected]">
       <p>ID: {{ item }} - selected: {{ item === selected }}</p>
     </div>
-    <br><hr><br><br>
+    <br><hr><br>
 
 
     <h3>Ref / ShallowRef</h3>
     <pre> {{ refValue.nested.count }} </pre>
     <pre> {{ shallowRefValue }} </pre>
     <v-btn @click="count">Count</v-btn>
-    <br><hr><br><br>
+    <br><br><hr><br>
+
+    <h3>toRefs</h3>
+    <pre> {{ toRefsObject }} </pre>
+    <pre> {{ age }} </pre>
+    <v-btn @click="increaseAge">Count</v-btn>
+    <br><br><hr><br>
 
     <h3>Reactive / ShallowReactive</h3>
     <pre> {{ reactiveValue.nested.count }} </pre>
     <pre> {{ reactiveShallow.nested.count }} </pre>
     <pre> {{ state }} </pre>
     <v-btn @click="countReactive">Count</v-btn>
-    <br>
+    <br><br><hr><br>
+
+
+    <h3>WATCH</h3>
+    <p>Watch Ref: {{ watchRef }}</p>
+    <p>Watch Reactive: {{ watchReactive }}</p>
+    <v-btn @click="increaseWatch">Count</v-btn>
+    <br><br><hr><br>
+
+    <h3>Slots</h3>
+    <slot></slot>
+    <slot name="description"></slot>
+    <slot name="user" :item="item"></slot>
+    <br><br><hr><br>
+
+    <h3>Suspense</h3>
+    <Suspense>
+      <template #fallback>
+        <p>Завантаження...</p>
+      </template>
+      <template #default>
+        <AsyncComponent />
+      </template>
+    </Suspense>
+    <br><br><hr><br>
+
+    <h3>Component</h3>
+    <v-btn @click="current = comps.CompA">Show A</v-btn>
+    <v-btn @click="current = comps.CompB">Show B</v-btn>
+    <keep-alive>
+      <component :is="current"></component>
+    </keep-alive>
 
   </div>
 </template>
@@ -76,8 +113,9 @@ import {
   onUpdated,
   reactive,
   ref, shallowReactive,
-  shallowRef
+  shallowRef, toRefs, watch, watchEffect
 } from "vue";
+import AsyncComponent from "~/components/TestComponent/TestComponents/AsyncComponent/AsyncComponent.vue";
 
 
 // V-Model
@@ -136,6 +174,15 @@ const countReactive = () => {
   state.user.name = 'Oleh'
 }
 
+const toRefsObject = reactive({ age: 20, user: "Alex" })
+const { age, user } = toRefs(toRefsObject);
+const increaseAge = () => {
+  age.value++;
+}
+
+
+
+
 
 // TODOLIST
 interface Item {
@@ -180,6 +227,48 @@ function next() {
   selected.value = (selected.value % items.value.length) + 1
 }
 
+// WATCH
+const watchRef = ref(0);
+const watchReactive = reactive({ count: 0 })
+// watch(watchRef, (newValue, oldValue) => console.log(`REF NEW: ${newValue}`, `OLD: ${oldValue}`))
+// watch(watchReactive, (newValue, oldValue) => console.log(`REACTIVE NEW: ${newValue.count}`, `OLD: ${oldValue.count}`))
+watch([watchRef, watchReactive], (newValue, oldValue) => {
+  console.group("WATCH")
+  console.log(`NEW: ${newValue}`, `OLD: ${oldValue}`)
+  console.groupEnd()
+}, {
+  deep: true,
+  immediate: false,
+  flush: 'post'
+})
+
+watchEffect(() => {
+  console.group("WATCH EFFECT")
+  console.log("WATCH Ref ", watchRef.value)
+  console.log("WATCH Reactive ", watchReactive.count)
+  console.log("WATCH Items ", arr.value)
+  console.groupEnd()
+}, {
+  flush: 'post'
+});
+
+const increaseWatch = () => {
+  watchRef.value++
+  watchReactive.count++;
+}
+
+// SLOT
+const item = reactive({ name: 'Ivan', age: 20 })
+
+
+// Component
+import CompA from "~/components/TestComponent/TestComponents/CompA/CompA.vue";
+import CompB from "~/components/TestComponent/TestComponents/CompB/CompB.vue";
+const comps = { CompA, CompB }
+const current = ref(CompA)
+
+
+//
 
 
 /*console.log("------")
