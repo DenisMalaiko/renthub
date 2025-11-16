@@ -1,9 +1,32 @@
 <script setup lang="ts">
 import TestComponent from "~/components/TestComponent/TestComponent.vue";
-import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated, ref} from "vue";
+import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated, reactive, ref} from "vue";
+import Select from "~/pages/Test/Select/Select.vue";
 
 const title = ref("title");
 const description = ref("description");
+
+interface Option {
+  name: string;
+  value: string;
+}
+
+const selected = ref<Option>(null as unknown as Option);
+
+const options = reactive<Option[]>([
+  {
+    name: "Option 1",
+    value: "1"
+  },
+  {
+    name: "Option 2",
+    value: "2"
+  },
+  {
+    name: "Option 3",
+    value: "3"
+  }
+])
 
 const testClick = () => {
   console.log("TEST CLICK")
@@ -50,6 +73,20 @@ onUnmounted(() => {
   <section class="mt-10 pt-10">
     <v-container class="px-0 mt-10">
       <v-row>
+        <v-col cols="12">
+          <Select
+            v-model:selected="selected"
+            :options="options"
+            color="grey"
+            type="underline"
+            v-slot="{ user }"
+          >
+            <pre>SCOPED SLOT: {{ user.name }} - {{ user.email }} </pre>
+          </Select>
+
+          <br><br>
+        </v-col>
+
         <v-col cols="12">
           <h1>!!! ГЛЯНУТИ ДО: REACTIVE !!!</h1>
 
