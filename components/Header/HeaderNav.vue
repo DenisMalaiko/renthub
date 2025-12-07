@@ -16,6 +16,13 @@
           <div class="header-menu">
             <ul class="header-menu-list">
               <li class="link">
+                <NuxtLink to="/review">
+                  <b> Review </b>
+                </NuxtLink>
+                |
+              </li>
+
+              <li class="link">
                 <NuxtLink to="/test">
                   <b> TEST </b>
                 </NuxtLink>
